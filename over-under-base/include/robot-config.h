@@ -17,6 +17,7 @@ extern inertial Inertia;
 extern rotation Rotation;
 
 extern timer PidDriveTimer;
+extern timer DebounceTimer;
 /** 
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  * 

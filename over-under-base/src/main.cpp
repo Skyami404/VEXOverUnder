@@ -25,6 +25,7 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 long pid_turn_by(double angle);
+long pid_turn(double angle);
 long pid_drive(double distance, int32_t time=60000, double space=0, double drivekp = 12);
 bool int_spin = false;
 bool vision_in_prog = false; 
@@ -53,7 +54,9 @@ void pre_auton(void) {
   vexcodeInit();
   Rotation.setPosition(0, degrees); // Rotation.resetPosition();
   Drivetrain.setDriveVelocity(100, percent);
+  Drivetrain.setStopping(hold);
   cata.setVelocity(100, percent);
+  Inertia.calibrate();
   
 }
 
@@ -70,33 +73,53 @@ void tdriverev(double rotation, double power, int32_t time) {
   Drivetrain.driveFor(reverse, rotation, inches);
 }
 
+// void arm(void) {
+//   arm.spinFor(120, degrees, true);
+// }
+
+
 // **** CATAPULT TESTING ****
 void cata_down100(void) {
   cata.setVelocity(100, percent);
+  cata.spin(forward, 10, volt);
   cata.spinFor(120, degrees, true);
 }
 
 void cata_down30(void) {
-  double rot_deg = Rotation.position(degrees);
+  
   cata.setVelocity(100, percent);
   cata.spinFor(10, degrees, true);
-  printf("rot_deg %f", rot_deg);
+
 
 }
 
 void cata_rot(double deg) { 
   while (deg > Rotation.position(degrees)) {
-    cata.spin(forward, 7, volt); // direction may be wrong
+    double rot_deg = Rotation.position(degrees);
+    printf("rot_deg %f\n", rot_deg);
+    cata.spin(forward, 10, volt); // direction may be wrong
   }
+  cata.stop();
 }
 
 
 void cata_button() {
-  cata_rot(100); // change degrees depending on how far you need it to go
+  if (DebounceTimer.value() < 0.1) {
+    return;
+  }
+  DebounceTimer.reset();
+  cata_rot(177); // change degrees depending on how far you need it to go
+
+
+  //cata_rot(180);
+  //cata.spinFor(forward, 3, degrees);
+
 }
 
 // Intake Functions
-
+void pid_test(void) {
+  pid_turn_by(90);
+}
 void intake_spin(void) {
   if (int_spin == false) {
     intake.spin(forward, 100, percent);
@@ -124,12 +147,50 @@ void intake_stop(void) {
 }
 void autonomous(void) {
 
+  pid_drive(22, 1000, 0, 5);
+  pid_turn_by(210);
+  wait(50, msec);
+  pid_drive(20, 5000, 0, 3);
+  arm.spin(reverse, 5, volt);
+  wait(1, sec);
+  //pid_drive(-3, 2000, 0, 3);
+  pid_drive(-3, 2000, 0, 5);
+  //arm.stop();
+  printf("hello");
+  //pid_turn_by(20);
+  printf("hello1");
+  Drivetrain.turnFor(45, degrees, true);
+  //arm.spin(reverse, 2, volt);
+  //wait(200, msec);
+  //pid_drive(-15, 60000, 0, 8);
+  Drivetrain.driveFor(reverse, 11, inches);
+  /*
+ auton 1 
+  //pid_turn(-20);
 
+auton 2 v1
+  pid_drive(30, 10000, 0, 7);
+  pid_turn_by(90);
+  intake.spin(forward, 8, volt);
+  wait(1, sec);
+  intake.stop();
+  pid_drive(-5, 5000, 0, 5);
+  //intake.stop();
+  pid_turn_by(180);
+  pid_drive(-15, 5000, 0, 7);
+  pid_drive(5, 5000, 0, 5);
+  //pid_drive(-15, 5000, 0, 5);
+ 
+  pid_turn_by(15);
+  pid_drive(20, 3000, 0, 7);
+  pid_drive(-10, 3000, 0, 5);
 
-
-
-
-  
+  pid_turn_by(315);
+  pid_drive(12, 3000, 0, 5);
+  arm.spin(reverse, 5, volt);
+  wait(1, sec);
+  pid_drive(-12, 300, 0, 9);
+  */
   }
 
 
@@ -146,7 +207,7 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
   long loop_count = 0;
   double error = 5000;
   double total_error = 0;
-  double derivative = 0.1;
+  double derivative = 0; //0.1
   double prev_error = 0;
   double voltage = 0;
   double min_volt = 2.5;   // we don't want to apply less than min_volt, or else drivetrain won't move
@@ -161,7 +222,7 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
   //   current_space = dist_sensor.objectDistance(inches);
   // }
 
-  //DEBUG_PRINT(PRINT_LEVEL_NORMAL, "Drive by distance %.2f, current_space %.2f, space %.2f\n", distance, current_space, space);
+  DEBUG_PRINT(PRINT_LEVEL_NORMAL, "Drive by distance %.2f, current_space %.2f, space %.2f\n", distance, current_space, space);
   // keep turning until we reach desired angle +/- tolerance
   while ((error > drive_tolerance) && (PidDriveTimer.time(msec) < (start_time + time)) && (current_space >= space )) {
     current_rotation = (RightDriveSmart.position(turns) + LeftDriveSmart.position(turns)) / 2;
@@ -200,14 +261,18 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
   }
   RightDriveSmart.stop();
   LeftDriveSmart.stop();
-  //DEBUG_PRINT(PRINT_LEVEL_DEBUG, "drive by distance %.2f, loop count %ld\n", distance, loop_count);
+  DEBUG_PRINT(PRINT_LEVEL_DEBUG, "drive by distance %.2f, loop count %ld\n", distance, loop_count);
   return loop_count;
 }
 
-double turn_kp = 0.15; //1.5
-double turn_ki = 0.0004; //0.0009
+void inertial_test(void) {
+  double inert = Inertia.rotation();
+  printf("%2f\n", inert);
+}
+double turn_kp = 0.1; //1.5
+double turn_ki = 0.000; //0.0009
 double turn_kd = 0;
-double turn_tolerance = 0.2;    // we want to stop when we reach the desired angle +/- 1 degree
+double turn_tolerance = 7.5;    // we want to stop when we reach the desired angle +/- 1 degree
 
 long pid_turn(double angle) {
   double delay = 20;   // Inertia can output reading at a rate of 50 hz (20 msec)
@@ -217,12 +282,12 @@ long pid_turn(double angle) {
   double derivative = 0;
   double prev_error = 0;
   double voltage = 0;
-  double min_volt = 2.5;   // we don't want to apply less than min_volt, or else drivetrain won't move
+  double min_volt = 0.1;   // we don't want to apply less than min_volt, or else drivetrain won't move
 //  double max_volt = 11.5;  // we don't want to apply more than max volt, or else we may damage motor
   double max_volt = 6.5;  // we don't want to apply more than max volt, or else we may damage motor
   bool direction = true;
 
-  //DEBUG_PRINT(PRINT_LEVEL_NORMAL, "Turn to angle %.2f, current angle %.2f\n", angle, Inertia.rotation());
+  DEBUG_PRINT(PRINT_LEVEL_NORMAL, "Turn to angle %.2f, current angle %.2f\n", angle, Inertia.rotation());
   // keep turning until we reach desired angle +/- tolerance
   while (error > turn_tolerance) {
     error = angle - Inertia.rotation();
@@ -241,6 +306,7 @@ long pid_turn(double angle) {
       voltage = max_volt;
     }
     //DEBUG_PRINT(PRINT_LEVEL_DEBUG, "error %.2f, voltage %.2f, direction %d, rotation %.2f\n", error, voltage, direction, Inertia.rotation());
+    error = angle - Inertia.rotation();
     if (direction) {
       RightDriveSmart.spin(reverse, voltage, volt);
       LeftDriveSmart.spin(forward, voltage, volt);
@@ -348,6 +414,9 @@ void usercontrol(void) {
   Controller.ButtonR2.pressed(cata_down30);
   Controller.ButtonL1.pressed(intake_spin);
   Controller.ButtonL2.pressed(intake_spin2);
+  Controller.ButtonA.pressed(pid_test);
+  Controller.ButtonB.pressed(cata_button);
+  Controller.ButtonX.pressed(inertial_test);
 
 
 

@@ -12,26 +12,26 @@ controller Controller;
 
 // ADJUST THE PORTS, DONT TOUCH ANYTHING ELSE
 
-motor L1 = motor(PORT19, ratio18_1, true); 
-motor L2 = motor(PORT9, ratio18_1, true);
+motor L1 = motor(PORT6, ratio18_1, true); 
+motor L2 = motor(PORT2, ratio18_1, true);
 motor_group LeftDriveSmart = motor_group(L1, L2);
 
-motor R1 = motor(PORT8, ratio18_1, false); 
-motor R2 = motor(PORT18, ratio18_1, false);
+motor R1 = motor(PORT9, ratio18_1, false); 
+motor R2 = motor(PORT1, ratio18_1, false);
 motor_group RightDriveSmart = motor_group(R1, R2);
 
+motor cata = motor(PORT11, ratio36_1, true);
+motor intake = motor(PORT10, ratio18_1, true); 
+motor arm = motor(PORT7, ratio18_1, true);
 int wheelTravel = 4 * M_PI;
 
-drivetrain Drivetrain = drivetrain(RightDriveSmart, LeftDriveSmart, wheelTravel, 13.5, 18, inches, 1);
+drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, wheelTravel, 13.5, 18, inches, 1);
 
-motor cata = motor(PORT10, ratio36_1, true);
-motor intake = motor(PORT7, ratio18_1, false); 
-motor arm = motor(PORT16, false);
-
-inertial Inertia = (PORT2); 
-rotation Rotation = (PORT20, false); 
+inertial Inertia = inertial(PORT3); 
+rotation Rotation = rotation(PORT5, false); 
 
 timer PidDriveTimer = timer();
+timer DebounceTimer = timer();
 
 // VEXcode generated functions
 
