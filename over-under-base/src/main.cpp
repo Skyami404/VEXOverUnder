@@ -122,7 +122,7 @@ void pid_test(void) {
 }
 void intake_spin(void) {
   if (int_spin == false) {
-    intake.spin(forward, 100, percent);
+    intake.spin(forward, 10, volt);
     int_spin = true;
   }
   else if (int_spin == true) {
@@ -164,33 +164,8 @@ void autonomous(void) {
   //wait(200, msec);
   //pid_drive(-15, 60000, 0, 8);
   Drivetrain.driveFor(reverse, 11, inches);
-  /*
- auton 1 
-  //pid_turn(-20);
+  
 
-auton 2 v1
-  pid_drive(30, 10000, 0, 7);
-  pid_turn_by(90);
-  intake.spin(forward, 8, volt);
-  wait(1, sec);
-  intake.stop();
-  pid_drive(-5, 5000, 0, 5);
-  //intake.stop();
-  pid_turn_by(180);
-  pid_drive(-15, 5000, 0, 7);
-  pid_drive(5, 5000, 0, 5);
-  //pid_drive(-15, 5000, 0, 5);
- 
-  pid_turn_by(15);
-  pid_drive(20, 3000, 0, 7);
-  pid_drive(-10, 3000, 0, 5);
-
-  pid_turn_by(315);
-  pid_drive(12, 3000, 0, 5);
-  arm.spin(reverse, 5, volt);
-  wait(1, sec);
-  pid_drive(-12, 300, 0, 9);
-  */
   }
 
 
