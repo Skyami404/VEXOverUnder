@@ -71,19 +71,21 @@ void tdriverev(double rotation, double power, int32_t time) {
   Drivetrain.setDriveVelocity(power, percent);
   Drivetrain.driveFor(reverse, rotation, inches);
 }
-
+bool cat = true;
 // **** CATAPULT TESTING ****
 void cata_loop(void) {
-  while (true) {
+  cat = true;
+  while (cat) {
   if (DebounceTimer.value() < 0.1) {
     return;
   }
     cata.setVelocity(100, percent);
-    cata.spinFor(190, degrees, true);
-    wait(0.2, sec);
-    cata.spinFor(175, degrees, true);
+    cata.spinFor(180, degrees, true);
+    wait(0.15, sec);
   }
+
 }
+
 
 void cata_load(void) {
   if (DebounceTimer.value() < 0.1) {
@@ -118,7 +120,7 @@ void cata_down30(void) { // DON'T USE THIS
 }
 
 void cata_stop(void) {
-  cata.stop();
+  cat = false;
 }
 
 void cata_rot(double deg) { // DON'T USE THIS
@@ -202,16 +204,28 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
-  pid_drive(30); // drives to goal
-  pid_turn_by(85); // turns to face goal
-  driveForward(10, 100, 800); // jams repeatedly into goal
-  intake.spin(reverse);
-  wait(0.1, sec);
-  pid_drive(-5);
-  wait(0.1, sec);
-  driveForward(10, 100, 800);
-  pid_drive(-5);
-  
+  // pid_drive(25, 4000); // drives to goal
+  // pid_turn_by(65); // turns to face goal
+  // driveForward(10, 100, 800); // jams repeatedly into goal
+  // intake.spin(reverse);
+  // wait(0.02, sec);
+  // pid_drive(-5);
+  // wait(0.02, sec);
+  // driveForward(10, 100, 800);
+  // pid_drive(-5);
+  // pid_turn_by(115);
+  // pid_drive(32, 4000);
+  // pid_turn_by(90);
+  // pid_drive(25, 6000, 0, 5);
+  // move_arm_down();
+
+  pid_drive(-22, 2000, 0, 200);
+  pid_drive(4);
+  pid_drive(-2);
+  //driveForward(-5, 100, 500);
+  pid_drive(16, 1000, 0, 8);
+  pid_turn_by(15);
+  pid_drive(40);
   }
 
 
