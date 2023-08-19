@@ -80,14 +80,15 @@ void tdriverev(double rotation, double power, int32_t time) {
 
 
 // **** CATAPULT TESTING ****
+bool cat = true;
 void cata_loop(void) {
-  while (true) {
+  while (cat) {
   if (DebounceTimer.value() < 0.1) {
     return;
   }
     cata.setVelocity(100, percent);
     cata.spinFor(180, degrees, true);
-    wait(0.2, sec);
+    wait(0.15, sec);
    
   }
 }
@@ -125,7 +126,7 @@ void cata_down30(void) { // DON'T USE THIS
 }
 
 void cata_stop(void) {
-  cata.stop();
+  cat = false;
 }
 
 void cata_rot(double deg) { // DON'T USE THIS
