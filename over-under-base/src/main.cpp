@@ -78,51 +78,81 @@ void tdriverev(double rotation, double power, int32_t time) {
 // }
 
 
+
 // **** CATAPULT TESTING ****
-void cata_down100(void) {
-  cata.setVelocity(100, percent);
-  cata.spin(forward, 10, volt);
-  cata.spinFor(120, degrees, true);
-}
-
-void cata_down30(void) {
-  
-  cata.setVelocity(100, percent);
-  cata.spinFor(10, degrees, true);
-
-
-}
-
-void cata_rot(double deg) { 
-  while (deg > Rotation.position(degrees)) {
-    double rot_deg = Rotation.position(degrees);
-    printf("rot_deg %f\n", rot_deg);
-    cata.spin(forward, 10, volt); // direction may be wrong
-  }
-  cata.stop();
-}
-
-
-void cata_button() {
+void cata_loop(void) {
+  while (true) {
   if (DebounceTimer.value() < 0.1) {
     return;
   }
-  DebounceTimer.reset();
-  cata_rot(177); // change degrees depending on how far you need it to go
+    cata.setVelocity(100, percent);
+    cata.spinFor(190, degrees, true);
+    wait(0.2, sec);
+    cata.spinFor(175, degrees, true);
+  }
+}
+
+void cata_load(void) {
+  if (DebounceTimer.value() < 0.1) {
+    return;
+  }
+  cata.setVelocity(100, percent);
+  cata.spinFor(190, degrees, true);
+}
+
+void cata_shoot(void) {
+  if (DebounceTimer.value() < 0.1) {
+    return;
+  }
+  cata.setVelocity(100, percent);
+  cata.spinFor(175, degrees, true);  
+}
+
+void cata_adjust(void) {
+  if (DebounceTimer.value() < 0.1) {
+    return;
+  }
+  cata.setVelocity(100, percent);
+  cata.spinFor(10, degrees, true);
+}
+
+void cata_down30(void) { // DON'T USE THIS
+  double rot_deg = Rotation.position(degrees);
+  cata.setVelocity(100, percent);
+  cata.spinFor(10, degrees, true);
+  printf("rot_deg %f", rot_deg);
+
+}
+
+void cata_stop(void) {
+  cata.stop();
+}
+
+void cata_rot(double deg) { // DON'T USE THIS
+  if (DebounceTimer.value() < 0.1) {
+    return;
+  }
+  while (true) {
+    if (deg > Rotation.position(degrees)) {
+      cata.spin(forward, 5, volt); // direction may be wrong
+    }
+    else {
+      cata.stop();
+      break;
+    }
+  }
+}
 
 
-  //cata_rot(180);
-  //cata.spinFor(forward, 3, degrees);
-
+void cata_button() { // DON'T USE THIS
+  cata_rot(175); // change degrees depending on how far you need it to go
 }
 
 // Intake Functions
-void pid_test(void) {
-  pid_turn_by(90);
-}
+
 void intake_spin(void) {
   if (int_spin == false) {
-    intake.spin(forward, 10, volt);
+    intake.spin(forward, 100, percent);
     int_spin = true;
   }
   else if (int_spin == true) {
@@ -144,6 +174,20 @@ void intake_spin2(void) {
 
 void intake_stop(void) {
   intake.stop();
+}
+
+// arm
+
+void move_arm_down(void) {
+  arm.setVelocity(100, percent);
+  arm.setTimeout(1000, msec);
+  arm.spinFor(forward, 135, degrees);
+}
+
+void move_arm_up(void) {
+  arm.setVelocity(100, percent);
+  arm.setTimeout(3000, msec);
+  arm.spinFor(reverse, 135, degrees);
 }
 void autonomous(void) {
 
@@ -385,13 +429,16 @@ void usercontrol(void) {
     
     }
     
-  Controller.ButtonR1.pressed(cata_down100);
-  Controller.ButtonR2.pressed(cata_down30);
-  Controller.ButtonL1.pressed(intake_spin);
-  Controller.ButtonL2.pressed(intake_spin2);
-  Controller.ButtonA.pressed(pid_test);
-  Controller.ButtonB.pressed(cata_button);
-  Controller.ButtonX.pressed(inertial_test);
+  Controller.ButtonR1.pressed(cata_load);
+  Controller.ButtonR2.pressed(cata_shoot);
+  Controller.ButtonL1.pressed(intake_spin2);
+  Controller.ButtonL2.pressed(intake_spin);
+  Controller.ButtonA.pressed(cata_loop);
+  Controller.ButtonB.pressed(cata_stop);
+  Controller.ButtonRight.pressed(cata_adjust);
+  Controller.ButtonDown.pressed(move_arm_down);
+  Controller.ButtonUp.pressed(move_arm_up);
+
 
 
 
