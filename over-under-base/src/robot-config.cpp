@@ -22,7 +22,7 @@ motor_group RightDriveSmart = motor_group(R1, R2);
 
 motor cata = motor(PORT11, ratio36_1, true);
 motor intake = motor(PORT10, ratio18_1, true); 
-motor arm = motor(PORT7, ratio18_1, true);
+motor arm = motor(PORT7, ratio18_1, false);
 int wheelTravel = 4 * M_PI;
 
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, wheelTravel, 13.5, 18, inches, 1);

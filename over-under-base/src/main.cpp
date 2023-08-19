@@ -180,34 +180,52 @@ void intake_stop(void) {
 
 void move_arm_down(void) {
   arm.setVelocity(100, percent);
-  arm.setTimeout(1000, msec);
+  arm.setTimeout(2, sec);
   arm.spinFor(forward, 135, degrees);
 }
 
 void move_arm_up(void) {
   arm.setVelocity(100, percent);
-  arm.setTimeout(3000, msec);
+  arm.setTimeout(5, sec);
   arm.spinFor(reverse, 135, degrees);
 }
 void autonomous(void) {
 
-  pid_drive(22, 1000, 0, 5);
+  pid_drive(22, 3000, 0, 3);
   pid_turn_by(210);
-  wait(50, msec);
-  pid_drive(20, 5000, 0, 3);
-  arm.spin(reverse, 5, volt);
-  wait(1, sec);
+  //wait(50, msec);
+  pid_drive(20, 2000, 0, 6);
+  move_arm_down();
+  //arm.spin(reverse, 5, volt);
+  wait(500, msec);
   //pid_drive(-3, 2000, 0, 3);
   pid_drive(-3, 2000, 0, 5);
   //arm.stop();
-  printf("hello");
+  //printf("hello");
   //pid_turn_by(20);
-  printf("hello1");
+  //printf("hello1");
   Drivetrain.turnFor(45, degrees, true);
   //arm.spin(reverse, 2, volt);
   //wait(200, msec);
   //pid_drive(-15, 60000, 0, 8);
-  Drivetrain.driveFor(reverse, 11, inches);
+  //move_arm_up();
+  pid_drive(8, 1000, 0, 8);
+  printf("hello");
+  pid_turn_by(25);
+   printf("hello");
+  pid_drive(30, 7000, 0, 10);
+   printf("hello");
+  move_arm_down();
+   printf("hello");
+  //arm.spin(forward, 5, volt);
+  /*pid_drive(-15, 3000, 0, 5);
+  pid_turn(130);
+  pid_drive(15, 3000, 0, 3);
+  pid_turn(270);
+  pid_drive(25, 7000, 0, 200);
+  move_arm_down();
+  */
+\
   
 
   }
@@ -288,7 +306,7 @@ void inertial_test(void) {
   double inert = Inertia.rotation();
   printf("%2f\n", inert);
 }
-double turn_kp = 0.1; //1.5
+double turn_kp = 0.05; //1.5
 double turn_ki = 0.000; //0.0009
 double turn_kd = 0;
 double turn_tolerance = 7.5;    // we want to stop when we reach the desired angle +/- 1 degree
