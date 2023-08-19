@@ -24,8 +24,8 @@ using namespace vex;
 
 // A global instance of competition
 competition Competition;
-long pid_turn_by(double angle);
-long pid_turn(double angle);
+long pid_turn_by(double angle, double kp=0.1);
+long pid_turn(double angle, double kp = 0.1);
 long pid_drive(double distance, int32_t time=60000, double space=0, double drivekp = 12);
 bool int_spin = false;
 bool vision_in_prog = false; 
@@ -86,9 +86,9 @@ void cata_loop(void) {
     return;
   }
     cata.setVelocity(100, percent);
-    cata.spinFor(190, degrees, true);
+    cata.spinFor(180, degrees, true);
     wait(0.2, sec);
-    cata.spinFor(175, degrees, true);
+   
   }
 }
 
@@ -180,34 +180,62 @@ void intake_stop(void) {
 
 void move_arm_down(void) {
   arm.setVelocity(100, percent);
-  arm.setTimeout(1000, msec);
+  arm.setTimeout(2, sec);
   arm.spinFor(forward, 135, degrees);
 }
 
 void move_arm_up(void) {
   arm.setVelocity(100, percent);
-  arm.setTimeout(3000, msec);
+  arm.setTimeout(3, sec);
   arm.spinFor(reverse, 135, degrees);
 }
 void autonomous(void) {
 
-  pid_drive(22, 1000, 0, 5);
-  pid_turn_by(210);
-  wait(50, msec);
-  pid_drive(20, 5000, 0, 3);
-  arm.spin(reverse, 5, volt);
-  wait(1, sec);
+  pid_drive(15, 1500, 0, 5);
+  pid_turn_by(335);
+  pid_drive(7, 1000, 0, 5);
+
+
+
+
+
+  //pid_drive(22, 3000, 0, 3);
+  //pid_turn_by(210);
+  //wait(50, msec);
+  //pid_drive(20, 2000, 0, 6);
+  move_arm_down();
+  //arm.spin(reverse, 5, volt);
+  wait(500, msec);
   //pid_drive(-3, 2000, 0, 3);
-  pid_drive(-3, 2000, 0, 5);
+  pid_drive(-1, 2000, 0, 5);
   //arm.stop();
-  printf("hello");
+  //printf("hello");
   //pid_turn_by(20);
-  printf("hello1");
-  Drivetrain.turnFor(45, degrees, true);
+  //printf("hello1");
+  pid_turn_by(45, 15);
   //arm.spin(reverse, 2, volt);
   //wait(200, msec);
   //pid_drive(-15, 60000, 0, 8);
-  Drivetrain.driveFor(reverse, 11, inches);
+  //move_arm_up();
+  printf("hello");
+  pid_drive(-10, 1000, 0, 8);
+  printf("hello");
+  move_arm_up();
+  pid_turn_by(110, 8);
+   printf("hello");
+  pid_drive(40, 7000, 0, 300);
+   printf("hello");
+  move_arm_down();
+   printf("hello");
+  //arm.spin(forward, 5, volt);
+  /*pid_drive(-15, 3000, 0, 5);
+  pid_turn(130);
+  pid_drive(15, 3000, 0, 3);
+  pid_turn(270);
+  pid_drive(25, 7000, 0, 200);
+  move_arm_down();
+  */
+\
   
 
   }
@@ -291,9 +319,10 @@ void inertial_test(void) {
 double turn_kp = 0.1; //1.5
 double turn_ki = 0.000; //0.0009
 double turn_kd = 0;
-double turn_tolerance = 7.5;    // we want to stop when we reach the desired angle +/- 1 degree
+double turn_tolerance = 8;    // we want to stop when we reach the desired angle +/- 1 degree
 
-long pid_turn(double angle) {
+long pid_turn(double angle, double kp) {
+  turn_kp = kp;
   double delay = 20;   // Inertia can output reading at a rate of 50 hz (20 msec)
   long loop_count = 0;
   double error = 5000;
@@ -343,9 +372,10 @@ long pid_turn(double angle) {
   return loop_count;
 }
 
-long pid_turn_by (double angle) 
+long pid_turn_by (double angle, double kp) 
 {
-  return pid_turn(Inertia.rotation() + angle);
+  
+  return pid_turn(Inertia.rotation() + angle, kp);
 }
 
 ////////////////////////////////////
