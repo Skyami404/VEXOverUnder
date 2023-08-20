@@ -223,9 +223,12 @@ void autonomous(void) {
   pid_drive(4);
   pid_drive(-2);
   //driveForward(-5, 100, 500);
-  pid_drive(16, 1000, 0, 8);
-  pid_turn_by(15);
-  pid_drive(40);
+  pid_drive(16, 700, 0, 8);
+  
+  pid_turn_by(30);
+  pid_drive(30);
+  pid_turn_by(10);
+  pid_drive(10, 1500);
   }
 
 

@@ -193,7 +193,8 @@ void move_arm_up(void) {
 void autonomous(void) {
 
   pid_drive(15, 1500, 0, 5);
-  pid_turn_by(335);
+  //Drivetrain.turnFor(270, degrees, true);
+  pid_turn_by(300);
   pid_drive(7, 1000, 0, 5);
 
 
@@ -222,9 +223,9 @@ void autonomous(void) {
   pid_drive(-10, 1000, 0, 8);
   printf("hello");
   move_arm_up();
-  pid_turn_by(110, 8);
+  pid_turn_by(340, 8);
    printf("hello");
-  pid_drive(40, 7000, 0, 300);
+  pid_drive(-30, 7000, 0, 300);
    printf("hello");
   move_arm_down();
    printf("hello");
