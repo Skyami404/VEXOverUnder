@@ -219,6 +219,8 @@ void autonomous(void) {
   // pid_drive(25, 6000, 0, 5);
   // move_arm_down();
 
+
+
   pid_drive(-22, 2000, 0, 200);
   pid_drive(4);
   pid_drive(-2);
@@ -303,10 +305,10 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
   return loop_count;
 }
 
-double turn_kp = 1.5; //1.5
-double turn_ki = 0.0009; //0.0009
+double turn_kp = 0.1; //1.5
+double turn_ki = 0.00000001; //0.0009
 double turn_kd = 0;
-double turn_tolerance = 7.5;    // we want to stop when we reach the desired angle +/- 1 degree
+double turn_tolerance = 10.5;    // we want to stop when we reach the desired angle +/- 1 degree
 
 long pid_turn(double angle) {
   double delay = 20;   // Inertia can output reading at a rate of 50 hz (20 msec)

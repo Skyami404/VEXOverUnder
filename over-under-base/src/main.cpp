@@ -24,8 +24,8 @@ using namespace vex;
 
 // A global instance of competition
 competition Competition;
-long pid_turn_by(double angle, double kp=0.1);
-long pid_turn(double angle, double kp = 0.1);
+long pid_turn_by(double angle);
+long pid_turn(double angle);
 long pid_drive(double distance, int32_t time=60000, double space=0, double drivekp = 12);
 bool int_spin = false;
 bool vision_in_prog = false; 
@@ -191,6 +191,10 @@ void move_arm_up(void) {
   arm.spinFor(reverse, 135, degrees);
 }
 void autonomous(void) {
+  pid_turn_by(-90);
+  wait(3, sec);
+  pid_turn_by(90);
+  wait(20, sec);
 
   pid_drive(15, 1500, 0, 5);
   //Drivetrain.turnFor(270, degrees, true);
@@ -214,7 +218,7 @@ void autonomous(void) {
   //printf("hello");
   //pid_turn_by(20);
   //printf("hello1");
-  pid_turn_by(45, 15);
+  pid_turn_by(45);
   //arm.spin(reverse, 2, volt);
   //wait(200, msec);
   //pid_drive(-15, 60000, 0, 8);
@@ -223,7 +227,7 @@ void autonomous(void) {
   pid_drive(-10, 1000, 0, 8);
   printf("hello");
   move_arm_up();
-  pid_turn_by(340, 8);
+  pid_turn_by(340);
    printf("hello");
   pid_drive(-30, 7000, 0, 300);
    printf("hello");
@@ -319,12 +323,11 @@ void inertial_test(void) {
   printf("%2f\n", inert);
 }
 double turn_kp = 0.1; //1.5
-double turn_ki = 0.000; //0.0009
+double turn_ki = 0.00000001; //0.0009
 double turn_kd = 0;
-double turn_tolerance = 8;    // we want to stop when we reach the desired angle +/- 1 degree
+double turn_tolerance = 10.5;    // we want to stop when we reach the desired angle +/- 1 degree
 
-long pid_turn(double angle, double kp) {
-  turn_kp = kp;
+long pid_turn(double angle) {
   double delay = 20;   // Inertia can output reading at a rate of 50 hz (20 msec)
   long loop_count = 0;
   double error = 5000;
@@ -332,12 +335,12 @@ long pid_turn(double angle, double kp) {
   double derivative = 0;
   double prev_error = 0;
   double voltage = 0;
-  double min_volt = 0.1;   // we don't want to apply less than min_volt, or else drivetrain won't move
+  double min_volt = 2.5;   // we don't want to apply less than min_volt, or else drivetrain won't move
 //  double max_volt = 11.5;  // we don't want to apply more than max volt, or else we may damage motor
   double max_volt = 6.5;  // we don't want to apply more than max volt, or else we may damage motor
   bool direction = true;
 
-  DEBUG_PRINT(PRINT_LEVEL_NORMAL, "Turn to angle %.2f, current angle %.2f\n", angle, Inertia.rotation());
+  //DEBUG_PRINT(PRINT_LEVEL_NORMAL, "Turn to angle %.2f, current angle %.2f\n", angle, Inertia.rotation());
   // keep turning until we reach desired angle +/- tolerance
   while (error > turn_tolerance) {
     error = angle - Inertia.rotation();
@@ -356,7 +359,6 @@ long pid_turn(double angle, double kp) {
       voltage = max_volt;
     }
     //DEBUG_PRINT(PRINT_LEVEL_DEBUG, "error %.2f, voltage %.2f, direction %d, rotation %.2f\n", error, voltage, direction, Inertia.rotation());
-    error = angle - Inertia.rotation();
     if (direction) {
       RightDriveSmart.spin(reverse, voltage, volt);
       LeftDriveSmart.spin(forward, voltage, volt);
@@ -373,11 +375,10 @@ long pid_turn(double angle, double kp) {
   //DEBUG_PRINT(PRINT_LEVEL_DEBUG, "Turn to angle %.2f, current angle %.2f, loop count %ld\n", angle, Inertia.rotation(), loop_count);
   return loop_count;
 }
-
-long pid_turn_by (double angle, double kp) 
+long pid_turn_by (double angle) 
 {
   
-  return pid_turn(Inertia.rotation() + angle, kp);
+  return pid_turn(Inertia.rotation() + angle);
 }
 
 ////////////////////////////////////
