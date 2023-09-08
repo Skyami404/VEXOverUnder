@@ -16,8 +16,13 @@ extern motor arm;
 extern inertial Inertia;
 extern rotation Rotation;
 
+extern digital_out wing1;
+extern digital_out wing2;
+
 extern timer PidDriveTimer;
 extern timer DebounceTimer;
+
+
 /** 
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  * 
