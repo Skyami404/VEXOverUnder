@@ -21,7 +21,7 @@ motor R2 = motor(PORT6, ratio18_1, false);
 motor_group RightDriveSmart = motor_group(R1, R2);
 
 motor cata = motor(PORT2, ratio36_1, true);
-motor intake = motor(PORT10, ratio18_1, true); 
+motor intake = motor(PORT20, ratio18_1, true); 
 //motor arm = motor(PORT7, ratio18_1, false);
 
 int wheelTravel = 4 * M_PI;
@@ -31,8 +31,8 @@ drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, wheelTravel,
 inertial Inertia = inertial(PORT5); 
 //rotation Rotation = rotation(PORT5, false); 
 
-digital_out wing1 = digital_out(Brain.ThreeWirePort.A); // might need to change piston ports
-digital_out wing2 = digital_out(Brain.ThreeWirePort.B);
+digital_out wing1 = digital_out(Brain.ThreeWirePort.A); 
+digital_out wing2 = digital_out(Brain.ThreeWirePort.H);
 
 timer PidDriveTimer = timer();
 timer DebounceTimer = timer();

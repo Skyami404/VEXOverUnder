@@ -51,7 +51,7 @@ bool vision_in_prog = false;
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  Rotation.setPosition(0, degrees); // Rotation.resetPosition();
+  //Rotation.setPosition(0, degrees); // Rotation.resetPosition();
   Drivetrain.setDriveVelocity(100, percent);
   cata.setVelocity(100, percent);
   Drivetrain.setStopping(hold);
@@ -171,19 +171,59 @@ void intake_stop(void) {
   intake.stop();
 }
 
+// wings
+bool w1 = false;
+void wing1_move(void) {
+  if (w1 == false) {
+    wing1.set(true);
+    w1 = true;
+  }
+  else {
+    wing1.set(false);
+    w1 = false;
+  }
+}
+
+bool w2 = false;
+void wing2_move(void) {
+  if (w2 == false) {
+    wing2.set(true);
+    w2 = true;
+  }
+  else {
+    wing2.set(false);
+    w2 = false;
+  }
+}
+
+void double_wing(void) {
+  if (w1 == false && w2 == false) {
+    wing1.set(true);
+    w1 = true;
+    wing2.set(true);
+    w2 = true;
+  }
+
+  else if(w1 == true && w2 == true) {
+    wing1.set(false);
+    w1 = false;
+    wing2.set(false);
+    w2 = false;
+  }
+}
 // arm
 
-void move_arm_down(void) {
-  arm.setVelocity(100, percent);
-  arm.setTimeout(1000, msec);
-  arm.spinFor(forward, 135, degrees);
-}
+// void move_arm_down(void) {
+//   arm.setVelocity(100, percent);
+//   arm.setTimeout(1000, msec);
+//   arm.spinFor(forward, 135, degrees);
+// }
 
-void move_arm_up(void) {
-  arm.setVelocity(100, percent);
-  arm.setTimeout(3000, msec);
-  arm.spinFor(reverse, 135, degrees);
-}
+// void move_arm_up(void) {
+//   arm.setVelocity(100, percent);
+//   arm.setTimeout(3000, msec);
+//   arm.spinFor(reverse, 135, degrees);
+// }
 
 //drives robot backward
 // rotation: how many turns of the wheel to travel backward
@@ -451,13 +491,14 @@ void usercontrol(void) {
   Controller.ButtonR2.pressed(cata_shoot);
   Controller.ButtonL1.pressed(intake_spin2);
   Controller.ButtonL2.pressed(intake_spin);
-  Controller.ButtonA.pressed(cata_loop);
-  Controller.ButtonB.pressed(cata_stop);
+  Controller.ButtonB.pressed(cata_loop);
+  Controller.ButtonLeft.pressed(cata_stop);
   Controller.ButtonRight.pressed(cata_adjust);
-  Controller.ButtonDown.pressed(move_arm_down);
-  Controller.ButtonUp.pressed(move_arm_up);
-
-
+  // Controller.ButtonDown.pressed(move_arm_down);
+  // Controller.ButtonUp.pressed(move_arm_up);
+  Controller.ButtonY.pressed(wing1_move);
+  Controller.ButtonA.pressed(wing2_move);
+  Controller.ButtonX.pressed(double_wing);
 
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo

@@ -32,7 +32,7 @@ inertial Inertia = inertial(PORT5);
 //rotation Rotation = rotation(PORT5, false); 
 
 digital_out wing1 = digital_out(Brain.ThreeWirePort.A); // might need to change piston ports
-digital_out wing2 = digital_out(Brain.ThreeWirePort.B);
+digital_out wing2 = digital_out(Brain.ThreeWirePort.H);
 
 timer PidDriveTimer = timer();
 timer DebounceTimer = timer();
