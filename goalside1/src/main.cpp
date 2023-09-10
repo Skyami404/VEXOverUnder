@@ -266,7 +266,7 @@ void autonomous(void) {
   // move_arm_down();
   intake.spin(reverse, 100, percent);
 
-    wait(15, sec);
+  wait(15, sec);
 
   pid_drive(-10, 500, 0, 200);
   pid_turn_by(-20);
@@ -278,7 +278,7 @@ void autonomous(void) {
   printf("hi \n");
   intake.spin(reverse, 100, percent);
   printf("hello \n");
-  pid_turn_by(95); // pick up second triball
+  pid_turn_by(100); // pick up second triball
   pid_drive(33);
   wait(0.001, sec);
   pid_drive(-33); // score it
