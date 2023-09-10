@@ -116,7 +116,7 @@ void cata_down30(void) { // DON'T USE THIS
 }
 
 void cata_stop(void) {
-  cat = false;
+  cata.stop();
 }
 
 void cata_rot(double deg) { // DON'T USE THIS
@@ -301,21 +301,24 @@ void autonomous(void) {
   pid_drive(5, 1000);
   */
 
-  pid_drive(40, 5000, 0, 10);
+  pid_drive(15, 5000, 0, 12);
   pid_turn_by(90);
-  pid_drive(20, 2000, 0, 12);
-  intake.spin(forward);
+  intake.spin(forward, 10, volt);
+  //pid_drive(6, 1000, 0, 12);
+  driveForward(6, 100, 1000);
   pid_drive(-5, 1000);
-  pid_drive(6, 1000);
+  //pid_drive(6, 1000, 0, 12);         
   intake.spin(reverse);
-  pid_drive(-20, 2000);
+  pid_drive(-15, 2000);
   pid_turn_by(-90);
   pid_drive(5, 1000);
   pid_drive(-10, 1000);
   pid_turn_by(90);
   intake.spin(forward);
   pid_drive(20, 2000, 0, 12);
-  
+  pid_drive(-5, 1000);
+  pid_drive(6, 1000, 0, 12);
+  pid_drive(-10, 2000);
 
 
 
