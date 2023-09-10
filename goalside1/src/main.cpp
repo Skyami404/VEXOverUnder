@@ -264,6 +264,9 @@ void autonomous(void) {
   // pid_turn_by(90);
   // pid_drive(25, 6000, 0, 5);
   // move_arm_down();
+
+
+  /*
   intake.spin(reverse, 100, percent);
 
   wait(15, sec);
@@ -296,6 +299,27 @@ void autonomous(void) {
   pid_drive(10, 1500);
   pid_turn_by(30);
   pid_drive(5, 1000);
+  */
+
+  pid_drive(40, 5000, 0, 10);
+  pid_turn_by(90);
+  pid_drive(20, 2000, 0, 12);
+  intake.spin(forward);
+  pid_drive(-5, 1000);
+  pid_drive(6, 1000);
+  intake.spin(reverse);
+  pid_drive(-20, 2000);
+  pid_turn_by(-90);
+  pid_drive(5, 1000);
+  pid_drive(-10, 1000);
+  pid_turn_by(90);
+  intake.spin(forward);
+  pid_drive(20, 2000, 0, 12);
+  
+
+
+
+
   }
 
 
