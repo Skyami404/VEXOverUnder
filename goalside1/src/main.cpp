@@ -267,9 +267,10 @@ void autonomous(void) {
 
 
   pid_turn_by(-10);
-  pid_drive(-22, 2000, 0, 200);
+  pid_drive(-10, 500, 0, 200);
+  pid_turn_by(-15);
+  pid_drive(-12, 600, 0, 200);
   pid_drive(8);
-  pid_turn_by(-10);
   pid_drive(-6);
   //driveForward(-5, 100, 500);
   pid_drive(10, 1000, 0, 8);
