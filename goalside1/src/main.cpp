@@ -274,11 +274,13 @@ void autonomous(void) {
   //driveForward(-5, 100, 500);
   pid_drive(10, 1000, 0, 8);
 
+  printf("hi \n");
   intake.spin(reverse, 100, percent);
+  printf("hello \n");
   pid_turn_by(100); // pick up second triball
-  pid_drive(25);
+  pid_drive(33);
   wait(0.001, sec);
-  pid_drive(-25); // score it
+  pid_drive(-33); // score it
   pid_turn_by(90);
   pid_drive(10);
   pid_turn_by(45);
