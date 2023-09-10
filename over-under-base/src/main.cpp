@@ -492,8 +492,8 @@ void usercontrol(void) {
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
-  Controller.ButtonY.pressed(wing1_move);
-  Controller.ButtonA.pressed(wing2_move);
+  Controller.ButtonA.pressed(wing1_move);
+  Controller.ButtonY.pressed(wing2_move);
   Controller.ButtonX.pressed(double_wing);
 
     // This is the main execution loop for the user control program.

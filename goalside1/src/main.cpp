@@ -269,12 +269,13 @@ void autonomous(void) {
   pid_turn_by(-10);
   pid_drive(-22, 2000, 0, 200);
   pid_drive(8);
+  pid_turn_by(-10);
   pid_drive(-6);
   //driveForward(-5, 100, 500);
   pid_drive(10, 1000, 0, 8);
 
   intake.spin(reverse);
-  pid_turn_by(105); // pick up second triball
+  pid_turn_by(90); // pick up second triball
   pid_drive(25);
   wait(0.001, sec);
   pid_drive(-25); // score it
@@ -517,8 +518,8 @@ void usercontrol(void) {
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
-  Controller.ButtonY.pressed(wing1_move);
-  Controller.ButtonA.pressed(wing2_move);
+  Controller.ButtonA.pressed(wing1_move);
+  Controller.ButtonY.pressed(wing2_move);
   Controller.ButtonX.pressed(double_wing);
 
     // This is the main execution loop for the user control program.
