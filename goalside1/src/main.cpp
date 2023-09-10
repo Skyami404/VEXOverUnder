@@ -273,10 +273,22 @@ void autonomous(void) {
   //driveForward(-5, 100, 500);
   pid_drive(16, 700, 0, 8);
   
-  pid_turn_by(30);
-  pid_drive(30);
-  pid_turn_by(10);
+  pid_turn_by(90); // pick up second triball
+  intake.spin(reverse);
+  pid_drive(25);
+
+  pid_drive(-25); // score it
+  pid_turn_by(-90);
+  pid_drive(20);
+  intake.spin(reverse);
+  pid_drive(-4);
+  pid_drive(4);
+
+  pid_drive(16); // touch elevation bar
+  pid_turn_by(-10);
   pid_drive(10, 1500);
+  pid_turn_by(-30);
+  pid_drive(5, 1000);
   }
 
 
