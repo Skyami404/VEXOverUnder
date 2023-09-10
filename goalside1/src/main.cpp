@@ -26,7 +26,6 @@ using namespace vex;
 competition Competition;
 long pid_turn_by(double angle);
 long pid_drive(double distance, int32_t time=60000, double space=0, double drivekp = 12);
-bool int_spin = false;
 bool vision_in_prog = false; 
 #define PRINT_LEVEL_MUST 0
 #define PRINT_LEVEL_NORMAL 1
@@ -73,40 +72,37 @@ void tdriverev(double rotation, double power, int32_t time) {
 }
 bool cat = true;
 // **** CATAPULT TESTING ****
+
 void cata_loop(void) {
-  cat = true;
-  while (cat) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
     return;
   }
-    cata.setVelocity(100, percent);
-    cata.spinFor(180, degrees, true);
-    wait(0.15, sec);
+  Debounce.reset();
+  cata.spin(forward, 10, volt);
   }
 
-}
 
 
 void cata_load(void) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
     return;
   }
+  Debounce.reset();
   cata.setVelocity(100, percent);
-  cata.spinFor(190, degrees, true);
+  cata.spinFor(110, degrees, true);
 }
 
 void cata_shoot(void) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
     return;
   }
+  Debounce.reset();
   cata.setVelocity(100, percent);
-  cata.spinFor(175, degrees, true);  
+  cata.spinFor(250, degrees, true);  
 }
 
 void cata_adjust(void) {
-  if (DebounceTimer.value() < 0.1) {
-    return;
-  }
+
   cata.setVelocity(100, percent);
   cata.spinFor(10, degrees, true);
 }
@@ -124,9 +120,7 @@ void cata_stop(void) {
 }
 
 void cata_rot(double deg) { // DON'T USE THIS
-  if (DebounceTimer.value() < 0.1) {
-    return;
-  }
+
   while (true) {
     if (deg > Rotation.position(degrees)) {
       cata.spin(forward, 5, volt); // direction may be wrong
@@ -144,26 +138,38 @@ void cata_button() { // DON'T USE THIS
 }
 
 // Intake Functions
-
+bool int_spin = false;
 void intake_spin(void) {
+  if (Debounce.value() < 0.1) {
+    return;
+  }
+  Debounce.reset();
   if (int_spin == false) {
     intake.spin(forward, 100, percent);
     int_spin = true;
+    printf("hi \n");
   }
-  else if (int_spin == true) {
+  else{
     intake.stop();
     int_spin = false;
+    printf("hi2 \n");
   }
 }
 
 void intake_spin2(void) {
+  if (Debounce.value() < 0.1) {
+    return;
+  }
+  Debounce.reset();
   if (int_spin == false) {
     intake.spin(reverse, 100, percent);
     int_spin = true;
+    printf("hello \n");
   }
-  else if (int_spin == true) {
+  else{
     intake.stop();
     int_spin = false;
+    printf("hello2 \n");
   }
 }
 

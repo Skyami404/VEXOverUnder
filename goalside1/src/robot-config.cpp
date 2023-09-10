@@ -35,7 +35,7 @@ digital_out wing1 = digital_out(Brain.ThreeWirePort.A); // might need to change 
 digital_out wing2 = digital_out(Brain.ThreeWirePort.H);
 
 timer PidDriveTimer = timer();
-timer DebounceTimer = timer();
+timer Debounce = timer();
 
 // VEXcode generated functions
 
