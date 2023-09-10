@@ -270,12 +270,11 @@ void autonomous(void) {
   pid_drive(-10, 500, 0, 200);
   pid_turn_by(-15);
   pid_drive(-12, 600, 0, 200);
-  pid_drive(8);
-  pid_drive(-6);
+  wait(0.1, sec);
   //driveForward(-5, 100, 500);
   pid_drive(10, 1000, 0, 8);
 
-  intake.spin(reverse);
+  intake.spin(reverse, 100, percent);
   pid_turn_by(90); // pick up second triball
   pid_drive(25);
   wait(0.001, sec);
