@@ -301,28 +301,30 @@ void autonomous(void) {
   pid_turn_by(30);
   pid_drive(5, 1000);
   */
-
+  intake.setVelocity(100, percent);
   pid_drive(5, 1000, 0, 100);
   pid_turn_by(-12);
-  pid_drive(8, 1000, 0, 100);
+  pid_drive(7.5, 1000, 0, 100);
   pid_turn_by(90);
   intake.spin(forward, 10, volt);
+  wait(200, msec);
   //pid_drive(6, 1000, 0, 12);
   driveForward(6, 100, 500);
   intake.stop();
-  pid_drive(-4, 1000);
+  pid_drive(-3, 1000);
+  pid_turn_by(12);
   wait(0.01, sec);
   driveForward(5, 100, 500);
   //pid_drive(6, 1000, 0, 12);         
   intake.spin(reverse);
   pid_drive(-12, 400);
-  pid_turn_by(-90);
+  pid_turn_by(-112);
   pid_drive(5, 1000);
   wait(0.01, sec);
-  pid_drive(-10, 1000);
+  // pid_drive(-5, 1000);
   pid_turn_by(90);
   intake.spin(forward);
-  pid_drive(20, 2000, 0, 12);
+  pid_drive(12, 1200, 0, 20);
   pid_drive(-5, 1000);
   pid_drive(6, 1000, 0, 12);
   pid_drive(-10, 2000);
