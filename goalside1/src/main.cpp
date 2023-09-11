@@ -302,9 +302,9 @@ void autonomous(void) {
   pid_drive(5, 1000);
   */
   intake.setVelocity(100, percent);
-  pid_drive(5, 1000, 0, 100);
+  pid_drive(3, 1000, 0, 100);
   pid_turn_by(-10);
-  pid_drive(7, 1000, 0, 100);
+  pid_drive(7.5, 1000, 0, 100);
   pid_turn_by(90);
   intake.spin(forward, 10, volt);
   wait(200, msec);
@@ -331,9 +331,9 @@ void autonomous(void) {
   pid_drive(-3, 800);
   pid_drive(10, 800);
 
-  pid_turn_by(-75);
+  pid_turn_by(-78);
 
-  pid_drive(-15, 800);
+  pid_drive(-20, 800);
   pid_turn_by(-90);
   pid_drive(6, 1000, 0, 12);
   pid_drive(-10, 2000);
