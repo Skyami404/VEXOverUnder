@@ -21,7 +21,7 @@ motor R2 = motor(PORT6, ratio18_1, false);
 motor_group RightDriveSmart = motor_group(R1, R2);
 
 motor cata = motor(PORT2, ratio36_1, true);
-motor intake = motor(PORT20, ratio18_1, true); 
+motor intake = motor(PORT10, ratio18_1, true); 
 //motor arm = motor(PORT7, ratio18_1, false);
 
 int wheelTravel = 4 * M_PI;

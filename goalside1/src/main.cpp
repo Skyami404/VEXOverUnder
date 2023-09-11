@@ -156,19 +156,20 @@ void intake_spin(void) {
   }
 }
 
+bool int_spin2 = false;
 void intake_spin2(void) {
   if (Debounce.value() < 0.1) {
     return;
   }
   Debounce.reset();
-  if (int_spin == false) {
+  if (int_spin2 == false) {
     intake.spin(reverse, 100, percent);
-    int_spin = true;
+    int_spin2 = true;
     printf("hello \n");
   }
   else{
     intake.stop();
-    int_spin = false;
+    int_spin2 = false;
     printf("hello2 \n");
   }
 }
@@ -250,7 +251,7 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
-  // pid_drive(25, 4000); // drives to goal
+   // pid_drive(25, 4000); // drives to goal
   // pid_turn_by(65); // turns to face goal
   // driveForward(10, 100, 800); // jams repeatedly into goal
   // intake.spin(reverse);
@@ -301,17 +302,23 @@ void autonomous(void) {
   pid_drive(5, 1000);
   */
 
-  pid_drive(15, 5000, 0, 12);
+  pid_drive(5, 1000, 0, 100);
+  pid_turn_by(-12);
+  pid_drive(8, 1000, 0, 100);
   pid_turn_by(90);
   intake.spin(forward, 10, volt);
   //pid_drive(6, 1000, 0, 12);
-  driveForward(6, 100, 1000);
-  pid_drive(-5, 1000);
+  driveForward(6, 100, 500);
+  intake.stop();
+  pid_drive(-4, 1000);
+  wait(0.01, sec);
+  driveForward(5, 100, 500);
   //pid_drive(6, 1000, 0, 12);         
   intake.spin(reverse);
-  pid_drive(-15, 2000);
+  pid_drive(-12, 400);
   pid_turn_by(-90);
   pid_drive(5, 1000);
+  wait(0.01, sec);
   pid_drive(-10, 1000);
   pid_turn_by(90);
   intake.spin(forward);
@@ -319,6 +326,7 @@ void autonomous(void) {
   pid_drive(-5, 1000);
   pid_drive(6, 1000, 0, 12);
   pid_drive(-10, 2000);
+
 
 
 

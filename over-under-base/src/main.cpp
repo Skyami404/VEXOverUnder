@@ -157,19 +157,20 @@ void intake_spin(void) {
   }
 }
 
+bool int_spin2 = false;
 void intake_spin2(void) {
   if (Debounce.value() < 0.1) {
     return;
   }
   Debounce.reset();
-  if (int_spin == false) {
+  if (int_spin2 == false) {
     intake.spin(reverse, 100, percent);
-    int_spin = true;
+    int_spin2 = true;
     printf("hello \n");
   }
   else{
     intake.stop();
-    int_spin = false;
+    int_spin2 = false;
     printf("hello2 \n");
   }
 }
