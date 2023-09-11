@@ -71,17 +71,22 @@ void tdriverev(double rotation, double power, int32_t time) {
   Drivetrain.setDriveVelocity(power, percent);
   Drivetrain.driveFor(reverse, rotation, inches);
 }
-bool cat = true;
+bool cat = false;
 // **** CATAPULT TESTING ****
-
 void cata_loop(void) {
   if (Debounce.value() < 0.1) {
-    return;
-  }
+      return;
+    }
   Debounce.reset();
-  cata.spin(forward, 10, volt);
+  if (cat == false) {
+    cata.spin(forward, 10, volt);
+    cat = true;
   }
-
+  else if (cat == true){
+    cata.stop();
+    cat = false;
+  }
+  }
 
 
 void cata_load(void) {
@@ -489,7 +494,6 @@ void usercontrol(void) {
   Controller.ButtonL1.pressed(intake_spin2);
   Controller.ButtonL2.pressed(intake_spin);
   Controller.ButtonB.pressed(cata_loop);
-  Controller.ButtonLeft.pressed(cata_stop);
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
