@@ -342,9 +342,10 @@ void autonomous(void) {
 
   pid_drive(-20, 1000);
   pid_turn_by(-90);
+  cata_shoot();
   intake.spin(reverse);
-  pid_drive(10, 800, 0, 20);
-  pid_drive(15, 800, 0, 7);
+  pid_drive(14, 800, 0, 20);
+  pid_drive(8, 800, 0, 5);
 
 
 
