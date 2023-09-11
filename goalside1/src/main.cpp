@@ -322,15 +322,19 @@ void autonomous(void) {
   pid_drive(-8, 400);
   pid_turn_by(-85);
   pid_drive(8, 500);
-  pid_turn_by(-90);
-  pid_drive(5, 500);
-  wait(0.01, sec);
-  pid_drive(-8, 800);
-  pid_drive(-5, 800);
+  pid_drive(-5, 500);
   pid_turn_by(90);
+
+  pid_drive(8, 500);
   intake.spin(forward);
-  pid_drive(12, 1200, 0, 20);
-  pid_drive(-5, 1000);
+  wait(0.01, sec);
+  pid_drive(-3, 800);
+  pid_drive(10, 800);
+
+  pid_turn_by(-90);
+
+  pid_drive(-15, 800);
+  pid_turn_by(-90);
   pid_drive(6, 1000, 0, 12);
   pid_drive(-10, 2000);
 
