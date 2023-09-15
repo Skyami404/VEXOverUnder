@@ -272,7 +272,47 @@ void autonomous(void) {
   // pid_drive(25, 6000, 0, 5);
   // move_arm_down();
 
+  intake.setVelocity(100, percent);
+  pid_drive(5, 1000, 0, 100);
+  pid_turn_by(-12);
+  pid_drive(7.5, 1000, 0, 100);
+  pid_turn_by(90);
+  intake.spin(forward, 10, volt); // score preload
+  wait(400, msec);
+  //pid_drive(6, 1000, 0, 12);
+  driveForward(6, 100, 500);
+  intake.stop();
+  wait(0.05, sec);
+  pid_drive(-3, 1000);
+  pid_turn_by(-15);
+  wait(0.01, sec);
+  driveForward(5, 100, 500);
+  //pid_drive(6, 1000, 0, 12); 
+
+  intake.spin(reverse); // pick up second triball
+  pid_turn_by(-30);
+  pid_drive(-10, 400);
+  pid_turn_by(-70);
+  pid_drive(8, 500);
+  pid_drive(-5, 500);
+  pid_turn_by(90);
+
+  pid_drive(8, 500); // score it
   intake.spin(forward);
+  wait(200, msec);
+  pid_drive(-3, 800, 0, 20);
+  pid_drive(5, 800, 0, 20);
+
+  pid_turn_by(180); // pick up third triball
+  intake.spin(reverse);
+  pid_drive(20, 1500);
+  pid_turn_by(180);
+
+  intake.spin(forward); // score it
+  pid_drive(20, 1500);
+  pid_drive(-5, 500);
+  pid_drive(5, 500);
+  pid_drive(-5, 500);
   }
 
 
