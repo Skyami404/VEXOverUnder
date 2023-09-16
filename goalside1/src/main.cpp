@@ -290,10 +290,10 @@ void autonomous(void) {
   //pid_turn_by(-40); //-30
   intake.spin(reverse); // pick up second triball
   //pid_drive(-10, 400);
-  pid_turn_by(-70); //-50
+  pid_turn_by(-68); //-50
   pid_drive(8, 500);
   pid_drive(-3, 500); //-5
-  pid_turn_by(75); //90
+  pid_turn_by(76); //90
 
   pid_drive(10, 1200); // score it //11
   intake.spin(forward);

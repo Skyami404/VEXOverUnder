@@ -281,7 +281,7 @@ void autonomous(void) {
   intake.stop();
   wait(0.05, sec);
   pid_turn_by(-4.5);
-  pid_drive(-6.5, 1000); //-8
+  pid_drive(-6.5, 1000, 14); //-8
   /*
   pid_turn_by(-15);
   wait(0.01, sec);
@@ -292,16 +292,17 @@ void autonomous(void) {
   intake.spin(reverse); // pick up second triball
   //pid_drive(-10, 400);
   pid_turn_by(-72); //-50
-  pid_drive(8, 500);
-  pid_drive(-3, 500); //-5
+  pid_drive(9.5, 500);
+  pid_drive(-4, 500); //-5
   pid_turn_by(75); //90
 
-  pid_drive(9, 800, 0, 20); // score it //11
+  pid_drive(8, 400, 0, 30); // score it //11
   //intake.spin(forward);
   //wait(200, msec);
   intake.spin(forward);
-  pid_drive(-1, 800, 0, 20);
-  pid_drive(3, 800, 0, 20); //10
+  wait(0.1, sec);
+  pid_drive(-1, 800, 0, 30);
+  pid_drive(3, 800, 0, 30); //10
 
 
 
@@ -309,15 +310,17 @@ void autonomous(void) {
   //wait(200, msec);
 
 
-  pid_turn_by(130);
+  pid_turn_by(132);
   intake.spin(reverse);
-  pid_drive(9, 1500, 0, 20); //move to pick up third triball
+  pid_drive(9, 800, 0, 30); //move to pick up third triball
   //wait(0.05, sec);
-  pid_drive(-9, 1000, 0, 10);
-  pid_turn_by(140); //95
+  pid_drive(-9, 1000, 0, 30);
+  pid_turn_by(170); //95
   intake.spin(forward); //outtakes triball
-  pid_drive(8, 1500, 0, 20); //pushes it inside
-  pid_drive(-3, 300); //goes out to make sure that the robot doesnt touch triball and ->
+  pid_drive(6, 400, 0, 40); //pushes it inside
+  pid_drive(-1, 300); //goes out to make sure that the robot doesnt touch triball and ->
+  pid_drive(1, 300);
+  pid_drive(-3);
   //dq scored triballs
 
   return;
