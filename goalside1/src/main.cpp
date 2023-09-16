@@ -187,6 +187,10 @@ void intake_stop(void) {
 // wings
 bool w1 = false;
 void wing1_move(void) {
+  if (Debounce.value() < 0.1) {
+      return;
+    }
+  Debounce.reset();
   if (w1 == false) {
     wing1.set(true);
     w1 = true;
@@ -199,6 +203,10 @@ void wing1_move(void) {
 
 bool w2 = false;
 void wing2_move(void) {
+  if (Debounce.value() < 0.1) {
+      return;
+    }
+  Debounce.reset();
   if (w2 == false) {
     wing2.set(true);
     w2 = true;
@@ -210,6 +218,10 @@ void wing2_move(void) {
 }
 
 void double_wing(void) {
+  if (Debounce.value() < 0.1) {
+      return;
+    }
+  Debounce.reset();
   if (w1 == false && w2 == false) {
     wing1.set(true);
     w1 = true;

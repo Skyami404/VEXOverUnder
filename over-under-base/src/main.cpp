@@ -79,7 +79,7 @@ void cata_loop(void) {
     }
   Debounce.reset();
   if (cat == false) {
-    cata.spin(forward, 10, volt);
+    cata.spin(forward, 9, volt);
     cat = true;
   }
   else if (cat == true){
@@ -187,6 +187,10 @@ void intake_stop(void) {
 // wings
 bool w1 = false;
 void wing1_move(void) {
+  if (Debounce.value() < 0.1) {
+      return;
+    }
+  Debounce.reset();
   if (w1 == false) {
     wing1.set(true);
     w1 = true;
@@ -199,6 +203,10 @@ void wing1_move(void) {
 
 bool w2 = false;
 void wing2_move(void) {
+  if (Debounce.value() < 0.1) {
+      return;
+    }
+  Debounce.reset();
   if (w2 == false) {
     wing2.set(true);
     w2 = true;
@@ -210,6 +218,10 @@ void wing2_move(void) {
 }
 
 void double_wing(void) {
+  if (Debounce.value() < 0.1) {
+      return;
+    }
+  Debounce.reset();
   if (w1 == false && w2 == false) {
     wing1.set(true);
     w1 = true;
@@ -257,21 +269,6 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
-  // pid_drive(25, 4000); // drives to goal
-  // pid_turn_by(65); // turns to face goal
-  // driveForward(10, 100, 800); // jams repeatedly into goal
-  // intake.spin(reverse);
-  // wait(0.02, sec);
-  // pid_drive(-5);
-  // wait(0.02, sec);
-  // driveForward(10, 100, 800);
-  // pid_drive(-5);
-  // pid_turn_by(115);
-  // pid_drive(32, 4000);
-  // pid_turn_by(90);
-  // pid_drive(25, 6000, 0, 5);
-  // move_arm_down();
-
   intake.setVelocity(100, percent);
   pid_drive(5, 1000, 0, 100);
   pid_turn_by(-12);
@@ -283,18 +280,56 @@ void autonomous(void) {
   driveForward(6, 100, 500);
   intake.stop();
   wait(0.05, sec);
-  pid_drive(-3, 1000);
+  pid_turn_by(-4.5);
+  pid_drive(-6.5, 1000); //-8
+  /*
   pid_turn_by(-15);
   wait(0.01, sec);
-  driveForward(5, 100, 500);
+  driveForward(5, 100, 500); */
   //pid_drive(6, 1000, 0, 12); 
 
+  //pid_turn_by(-40); //-30
   intake.spin(reverse); // pick up second triball
-  pid_turn_by(-30);
-  pid_drive(-10, 400);
-  pid_turn_by(-70);
+  //pid_drive(-10, 400);
+  pid_turn_by(-72); //-50
   pid_drive(8, 500);
-  pid_drive(-5, 500);
+  pid_drive(-3, 500); //-5
+  pid_turn_by(75); //90
+
+  pid_drive(9, 800, 0, 20); // score it //11
+  //intake.spin(forward);
+  //wait(200, msec);
+  intake.spin(forward);
+  pid_drive(-1, 800, 0, 20);
+  pid_drive(3, 800, 0, 20); //10
+
+
+
+  pid_drive(-4, 800);
+  //wait(200, msec);
+
+
+  pid_turn_by(130);
+  intake.spin(reverse);
+  pid_drive(9, 1500, 0, 20); //move to pick up third triball
+  //wait(0.05, sec);
+  pid_drive(-9, 1000, 0, 10);
+  pid_turn_by(140); //95
+  intake.spin(forward); //outtakes triball
+  pid_drive(8, 1500, 0, 20); //pushes it inside
+  pid_drive(-3, 300); //goes out to make sure that the robot doesnt touch triball and ->
+  //dq scored triballs
+
+  return;
+
+  intake.spin(forward);
+  pid_drive(-3, 200);
+  pid_drive(5, 300);
+  pid_drive(-5, 300, 0, 20);
+
+  return; 
+
+
   pid_turn_by(90);
 
   pid_drive(8, 500); // score it
@@ -538,6 +573,7 @@ void usercontrol(void) {
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
   Controller.ButtonA.pressed(wing1_move);
+
   Controller.ButtonY.pressed(wing2_move);
   Controller.ButtonX.pressed(double_wing);
 
