@@ -257,56 +257,6 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
-   // pid_drive(25, 4000); // drives to goal
-  // pid_turn_by(65); // turns to face goal
-  // driveForward(10, 100, 800); // jams repeatedly into goal
-  // intake.spin(reverse);
-  // wait(0.02, sec);
-  // pid_drive(-5);
-  // wait(0.02, sec);
-  // driveForward(10, 100, 800);
-  // pid_drive(-5);
-  // pid_turn_by(115);
-  // pid_drive(32, 4000);
-  // pid_turn_by(90);
-  // pid_drive(25, 6000, 0, 5);
-  // move_arm_down();
-
-
-  /*
-  intake.spin(reverse, 100, percent);
-
-  wait(15, sec);
-
-  pid_drive(-10, 500, 0, 200);
-  pid_turn_by(-20);
-  pid_drive(-14, 800, 0, 200);
-  wait(0.1, sec);
-  //driveForward(-5, 100, 500);
-  pid_drive(10, 1000, 0, 8);
-
-  printf("hi \n");
-  intake.spin(reverse, 100, percent);
-  printf("hello \n");
-  pid_turn_by(100); // pick up second triball
-  pid_drive(33);
-  wait(0.001, sec);
-  pid_drive(-33); // score it
-  pid_turn_by(90);
-  pid_drive(10);
-  pid_turn_by(45);
-  pid_drive(20, 1200);
-  intake.spin(forward);
-  pid_drive(-4);
-  pid_drive(4);
-
-  wait(20, sec);
-  pid_drive(16); // touch elevation bar
-  pid_turn_by(10);
-  pid_drive(10, 1500);
-  pid_turn_by(30);
-  pid_drive(5, 1000);
-  */
   intake.setVelocity(100, percent);
   pid_drive(5, 1000, 0, 100);
   pid_turn_by(-12);
@@ -318,40 +268,37 @@ void autonomous(void) {
   driveForward(6, 100, 500);
   intake.stop();
   wait(0.05, sec);
-  pid_drive(-3, 1000);
+  pid_drive(-8, 1000); //-3
+  /*
   pid_turn_by(-15);
   wait(0.01, sec);
-  driveForward(5, 100, 500);
+  driveForward(5, 100, 500); */
   //pid_drive(6, 1000, 0, 12); 
 
+  //pid_turn_by(-40); //-30
   intake.spin(reverse); // pick up second triball
-  pid_turn_by(-30);
-  pid_drive(-10, 400);
-  pid_turn_by(-70);
+  //pid_drive(-10, 400);
+  pid_turn_by(-70); //-50
   pid_drive(8, 500);
-  pid_drive(-5, 500);
-  pid_turn_by(90);
+  pid_drive(-3, 500); //-5
+  pid_turn_by(75); //90
 
-  pid_drive(8, 500); // score it
+  pid_drive(10, 1200); // score it //11
   intake.spin(forward);
   wait(200, msec);
   pid_drive(-3, 800, 0, 20);
-  pid_drive(10, 800, 0, 20);
+  pid_drive(7, 800, 0, 20); //10
 
-  pid_turn_by(-82);
+  pid_drive(-3, 800); //-6
 
-  pid_drive(-20, 1000); // touch elevation bar 
+  pid_turn_by(-89); //-85
+
+  pid_drive(-19, 1000, 20); // touch elevation bar 
   pid_turn_by(-88);
   cata_shoot();
   intake.spin(reverse);
   pid_drive(12, 800, 0, 20);
-  pid_drive(10, 800, 0, 5);
-
-
-
-
-
-
+  pid_drive(12, 800, 0, 5);
   }
 
 
