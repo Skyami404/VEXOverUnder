@@ -280,7 +280,7 @@ void autonomous(void) {
   driveForward(6, 100, 500);
   intake.stop();
   wait(0.05, sec);
-  pid_drive(-8, 1000); //-3
+  pid_drive(-6.8, 1000); //-3
   /*
   pid_turn_by(-15);
   wait(0.01, sec);
@@ -309,8 +309,9 @@ void autonomous(void) {
   pid_turn_by(-88);
   cata_shoot();
   intake.spin(reverse);
-  pid_drive(12, 800, 0, 20);
-  pid_drive(12, 800, 0, 5);
+  pid_drive(12, 1000, 0, 20);
+  pid_drive(14, 1500, 0, 5);
+  
   }
 
 

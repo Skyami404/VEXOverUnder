@@ -319,10 +319,11 @@ void autonomous(void) {
   pid_drive(11, 800, 0, 40);
   intake.spin(forward); //outtakes triball
   //pid_drive(6, 400, 0, 40); //pushes it inside
-  pid_drive(-2, 400, 0, 20); //goes out to make sure that the robot doesnt touch triball and ->
-  pid_drive(2, 400, 0, 20);
-  pid_drive(-5);
-  pid_drive(5, 1000, 0, 40);
+  pid_drive(-4, 800, 0, 40); //goes out to make sure that the robot doesnt touch triball and ->
+  pid_drive(3, 800, 0, 40);
+  pid_drive(-5, 800, 0, 60);
+  // pid_drive(3, 200, 0, 40);
+  // pid_drive(-5, 1000, 0, 40);
   //dq scored triballs
 
   return;
