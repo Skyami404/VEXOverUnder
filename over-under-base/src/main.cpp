@@ -79,7 +79,7 @@ void cata_loop(void) {
     }
   Debounce.reset();
   if (cat == false) {
-    cata.spin(forward, 9, volt);
+    cata.spin(forward, 11, volt);
     cat = true;
   }
   else if (cat == true){
