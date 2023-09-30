@@ -177,7 +177,58 @@ void intake_stop(void) {
   intake.stop();
 }
 
-// arm
+// wings
+bool w1 = false;
+void wing1_move(void) {
+  if (DebounceTimer.value() < 0.1) {
+      return;
+    }
+  DebounceTimer.reset();
+  if (w1 == false) {
+    wing1.set(true);
+    w1 = true;
+  }
+  else {
+    wing1.set(false);
+    w1 = false;
+  }
+}
+
+bool w2 = false;
+void wing2_move(void) {
+  if (DebounceTimer.value() < 0.1) {
+      return;
+    }
+  DebounceTimer.reset();
+  if (w2 == false) {
+    wing2.set(true);
+    w2 = true;
+  }
+  else {
+    wing2.set(false);
+    w2 = false;
+  }
+}
+
+void double_wing(void) {
+  if (DebounceTimer.value() < 0.1) {
+      return;
+    }
+  DebounceTimer.reset();
+  if (w1 == false && w2 == false) {
+    wing1.set(true);
+    w1 = true;
+    wing2.set(true);
+    w2 = true;
+  }
+
+  else if(w1 == true && w2 == true) {
+    wing1.set(false);
+    w1 = false;
+    wing2.set(false);
+    w2 = false;
+  }
+}
 
 void move_arm_down(void) {
   arm.setVelocity(100, percent);
@@ -193,8 +244,21 @@ void move_arm_up(void) {
 void autonomous(void) {
   pid_drive(-5, 2000, 0, 8);
   move_arm_down();
-  cata_loop();
-  
+  int count = 0;
+  while (count < 46) {
+    cata.spinFor(forward, 360, degrees);
+    count ++;
+  }
+  pid_turn_by(20);
+  pid_drive(8);
+  pid_turn_by(-10);
+  cata_load();
+  pid_drive(15);
+  pid_turn_by(-90);
+  pid_drive(15);
+  pid_turn_by(90);
+  double_wing();
+  pid_drive(10, 20000, 0, 20); 
 
   }
 
