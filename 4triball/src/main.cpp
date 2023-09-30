@@ -271,13 +271,14 @@ void driveForward(double rotation, double power, int32_t time) {
 void autonomous(void) {
   intake.setVelocity(100, percent);
   pid_drive(-12.5, 1000, 0, 100);
-  double_wing(); // push both triballs
   pid_turn_by(90); // score preload + 2nd triball
+  double_wing();
   pid_drive(-15, 800, 0, 200);
 
   //pid_drive(6, 1000, 0, 12);
   intake.spin(reverse);
   pid_drive(20, 1000, 20); // pick up third triball
+  double_wing();
   pid_turn_by(180); 
   intake.spin(forward);
   pid_drive(20, 1000, 0, 200); // score it
@@ -290,9 +291,11 @@ void autonomous(void) {
   intake.spin(forward);
   pid_drive(20, 1000, 0, 200); // score it
   
-  pid_drive(-3); // jam it + move away
-  pid_drive(2);
+  pid_drive(-5);
+  pid_turn_by(180);
+  double_wing();
   pid_drive(-3);
+  pid_drive(5); 
   
   }
 
