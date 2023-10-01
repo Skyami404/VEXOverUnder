@@ -272,7 +272,7 @@ void driveForward(double rotation, double power, int32_t time) {
 void autonomous(void) {
   intake.setVelocity(100, percent);
   pid_drive(4, 800, 0, 20);
-  pid_turn_by(-2286);
+  pid_turn_by(-28);
   pid_drive(13, 2000, 0, 30);
   pid_turn_by(65); // score preload + 2nd triball
   double_wing();
