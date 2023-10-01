@@ -221,14 +221,14 @@ void double_wing(void) {
   if (Debounce.value() < 0.1) {
       return;
     }
-  Debounce.reset();
+
   if (w1 == false && w2 == false) {
     wing1.set(true);
     w1 = true;
     wing2.set(true);
     w2 = true;
   }
-
+  
   else if(w1 == true && w2 == true) {
     wing1.set(false);
     w1 = false;
@@ -236,6 +236,7 @@ void double_wing(void) {
     w2 = false;
   }
 }
+
 // arm
 
 // void move_arm_down(void) {
@@ -270,24 +271,31 @@ void driveForward(double rotation, double power, int32_t time) {
 
 void autonomous(void) {
   intake.setVelocity(100, percent);
-  pid_drive(-12.5, 1000, 0, 100);
-  pid_turn_by(90); // score preload + 2nd triball
+  pid_drive(4, 800, 0, 20);
+  pid_turn_by(-2286);
+  pid_drive(13, 2000, 0, 30);
+  pid_turn_by(65); // score preload + 2nd triball
   double_wing();
-  pid_drive(-15, 800, 0, 200);
+  pid_turn_by(60);
+  intake.spin(forward);
+  wait(0.2, sec);
+  pid_drive(15, 800, 0, 200);
+  double_wing();
+  pid_drive(-5);
+  pid_turn_by(-170);
 
   //pid_drive(6, 1000, 0, 12);
   intake.spin(reverse);
-  pid_drive(20, 1000, 20); // pick up third triball
-  double_wing();
+  pid_drive(12, 750, 20); // pick up third triball
   pid_turn_by(180); 
   intake.spin(forward);
   pid_drive(20, 1000, 0, 200); // score it
 
   pid_drive(-5, 400, 0, 15);
-  pid_turn_by(140);
+  pid_turn_by(90);
   intake.spin(reverse);
-  pid_drive(20, 1000, 0, 20); // pick up 4th triball
-  pid_turn_by(-140);
+  pid_drive(20, 800, 0, 20); // pick up 4th triball
+  pid_turn_by(180);
   intake.spin(forward);
   pid_drive(20, 1000, 0, 200); // score it
   

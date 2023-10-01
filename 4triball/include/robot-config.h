@@ -21,6 +21,7 @@ extern digital_out wing2;
 
 extern timer PidDriveTimer;
 extern timer Debounce;
+extern timer wings_timer;
 
 
 /** 
