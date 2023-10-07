@@ -275,12 +275,12 @@ void autonomous(void) {
   pid_turn_by(-28);
   pid_drive(12.7, 2000, 0, 30);
   pid_turn_by(125); // score preload + 2nd triball
-  double_wing();
+  wing2_move();
   pid_turn_by(10);
   intake.spin(forward);
   wait(0.2, sec);
   pid_drive(15, 800, 0, 200);
-  double_wing();
+  wing2_move();
   pid_drive(-5);
   pid_turn_by(-160);
 
