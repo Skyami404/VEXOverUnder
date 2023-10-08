@@ -52,7 +52,7 @@ bool vision_in_prog = false;
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  Rotation.setPosition(0, degrees); // Rotation.resetPosition();
+  //Rotation.setPosition(0, degrees); // Rotation.resetPosition();
   Drivetrain.setDriveVelocity(100, percent);
   Drivetrain.setStopping(hold);
   cata.setVelocity(100, percent);
@@ -129,25 +129,25 @@ void cata_stop(void) {
   cat = false;
 }
 
-void cata_rot(double deg) { // DON'T USE THIS
-  if (DebounceTimer.value() < 0.1) {
-    return;
-  }
-  while (true) {
-    if (deg > Rotation.position(degrees)) {
-      cata.spin(forward, 5, volt); // direction may be wrong
-    }
-    else {
-      cata.stop();
-      break;
-    }
-  }
-}
+// void cata_rot(double deg) { // DON'T USE THIS
+//   if (DebounceTimer.value() < 0.1) {
+//     return;
+//   }
+//   while (true) {
+//     if (deg > Rotation.position(degrees)) {
+//       cata.spin(forward, 5, volt); // direction may be wrong
+//     }
+//     else {
+//       cata.stop();
+//       break;
+//     }
+//   }
+// }
 
 
-void cata_button() { // DON'T USE THIS
-  cata_rot(175); // change degrees depending on how far you need it to go
-}
+// void cata_button() { // DON'T USE THIS
+//   cata_rot(175); // change degrees depending on how far you need it to go
+// }
 
 // Intake Functions
 
@@ -230,35 +230,47 @@ void double_wing(void) {
   }
 }
 
-void move_arm_down(void) {
-  arm.setVelocity(100, percent);
-  arm.setTimeout(2, sec);
-  arm.spinFor(forward, 135, degrees);
-}
+// void move_arm_down(void) {
+//   arm.setVelocity(100, percent);
+//   arm.setTimeout(2, sec);
+//   arm.spinFor(forward, 135, degrees);
+// }
 
-void move_arm_up(void) {
-  arm.setVelocity(100, percent);
-  arm.setTimeout(3, sec);
-  arm.spinFor(reverse, 135, degrees);
-}
-void autonomous(void) {
-  pid_drive(-5, 2000, 0, 8);
-  move_arm_down();
+// void move_arm_up(void) {
+//   arm.setVelocity(100, percent);
+//   arm.setTimeout(3, sec);
+//   arm.spinFor(reverse, 135, degrees);
+// }
+void autonomous(void) { 
   int count = 0;
-  while (count < 46) {
+  while (count < 5) {
     cata.spinFor(forward, 360, degrees);
     count ++;
   }
-  pid_turn_by(20);
-  pid_drive(8);
-  pid_turn_by(-10);
   cata_load();
-  pid_drive(15);
+  pid_turn_by(20);
+  pid_drive(-35); 
   pid_turn_by(-90);
-  pid_drive(15);
-  pid_turn_by(90);
+  wing2_move();
+  pid_drive(-15);
+  pid_turn_by(-30);
+  pid_drive(-10);
+  wing2_move();
+  pid_drive(10);
+  pid_turn_by(-65);
+  pid_drive(-17);
+  pid_turn(30);
   double_wing();
-  pid_drive(10, 20000, 0, 20); 
+  pid_drive(-11);
+  pid_turn(35);
+  pid_drive(-15);
+  double_wing();
+  pid_drive(11);
+  pid_turn(-90);
+  pid_drive(-20);
+  pid_turn(45);
+  double_wing();
+  pid_drive(-15);
 
   }
 
@@ -488,8 +500,8 @@ void usercontrol(void) {
   Controller.ButtonA.pressed(cata_loop);
   Controller.ButtonB.pressed(cata_stop);
   Controller.ButtonRight.pressed(cata_adjust);
-  Controller.ButtonDown.pressed(move_arm_down);
-  Controller.ButtonUp.pressed(move_arm_up);
+  //Controller.ButtonDown.pressed(move_arm_down);
+  //Controller.ButtonUp.pressed(move_arm_up);
 
 
 
