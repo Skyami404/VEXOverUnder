@@ -530,7 +530,6 @@ void usercontrol(void) {
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
   Controller.ButtonA.pressed(wing1_move);
-
   Controller.ButtonY.pressed(wing2_move);
   Controller.ButtonX.pressed(double_wing);
 
