@@ -244,6 +244,7 @@ void double_wing(void) {
 //   arm.setTimeout(3, sec);
 //   arm.spinFor(reverse, 135, degrees);
 // }
+
 void autonomous(void) {
   //pid_drive(-1);
   //pid_turn_by(20);
@@ -266,9 +267,7 @@ void autonomous(void) {
   pid_turn_by(70);
   double_wing();
   pid_drive(-15, 3000, 0, 20);
-  }
-
-
+}
 // USER CONTROL
   
 
@@ -495,7 +494,6 @@ void usercontrol(void) {
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
-
 
 
 
