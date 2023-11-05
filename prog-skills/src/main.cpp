@@ -24,7 +24,7 @@ using namespace vex;
 
 // A global instance of competition
 competition Competition;
-long pid_turn_by(double angle);
+long pid_turn_by(double angle, int32_t time=60000);
 long pid_turn(double angle);
 long pid_drive(double distance, int32_t time=60000, double space=0, double drivekp = 12);
 bool int_spin = false;
@@ -257,21 +257,23 @@ void autonomous(void) {
   //cata_load();
   printf("another one of me");
   pid_drive(-2);
-  pid_turn_by(40);
+  pid_turn_by(35, 5000);
   printf("joe");
-  pid_drive(-28);
-  printf("yoloyolo");
-  pid_turn_by(-34);
-  printf("the secret recipe");
-  wait(1, sec);
-  //pid_drive(3);
-  pid_drive(-9);
-  wait(1, sec);
-  pid_turn_by(-45);
+  pid_drive(-20, 3000, 0, 12);
+  wait(3, sec);
+  pid_turn_by(-10, 3000);
   pid_drive(-10);
-  //wing2_move();
-  pid_drive(10);
+  printf("yoloyolo");
+  pid_turn_by(-40, 1000);
+  printf("the secret recipe");
+  //wait(1, sec);
+  pid_drive(-12);
+  //wait(1, sec);
 
+  //pid_turn_by(-45);
+  pid_drive(-10);
+  pid_drive(10);
+  return;
 
   pid_turn_by(-65);
   cata_loop();
@@ -373,7 +375,7 @@ double turn_ki = 0.00000001; //0.0009
 double turn_kd = 0;
 double turn_tolerance = 10.5;    // we want to stop when we reach the desired angle +/- 1 degree
 
-long pid_turn(double angle) {
+long pid_turn(double angle, int32_t time) {
   double delay = 20;   // Inertia can output reading at a rate of 50 hz (20 msec)
   long loop_count = 0;
   double error = 5000;
@@ -383,12 +385,13 @@ long pid_turn(double angle) {
   double voltage = 0;
   double min_volt = 2.5;   // we don't want to apply less than min_volt, or else drivetrain won't move
 //  double max_volt = 11.5;  // we don't want to apply more than max volt, or else we may damage motor
+  double start_time = PidTurnTimer.time(msec);
   double max_volt = 6.5;  // we don't want to apply more than max volt, or else we may damage motor
   bool direction = true;
 
   //DEBUG_PRINT(PRINT_LEVEL_NORMAL, "Turn to angle %.2f, current angle %.2f\n", angle, Inertia.rotation());
   // keep turning until we reach desired angle +/- tolerance
-  while (error > turn_tolerance) {
+  while ((error > turn_tolerance) && (PidTurnTimer.time(msec) < (start_time + time))) {
     error = angle - Inertia.rotation();
     if (error < 0) {
       error = error * -1;
@@ -426,10 +429,10 @@ long pid_turn(double angle) {
   return loop_count;
 }
 
-long pid_turn_by (double angle) 
+long pid_turn_by (double angle, int32_t time) 
 {
   
-  return pid_turn(Inertia.rotation() + angle);
+  return pid_turn(Inertia.rotation() + angle, time);
 }
 
 ////////////////////////////////////
