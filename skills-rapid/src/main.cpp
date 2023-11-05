@@ -247,16 +247,26 @@ void autonomous(void) {
     cata.spinFor(forward, 360, degrees);
     count ++;
   }
-  cata_load();
-  pid_turn_by(20);
-  pid_drive(-35); 
-  pid_turn_by(-90);
-  wing2_move();
-  pid_drive(-15);
-  pid_turn_by(-30);
+
+  //cata_load();
+  printf("another one of me");
+  pid_drive(-2);
+  pid_turn_by(40);
+  printf("joe");
+  pid_drive(-28);
+  printf("yoloyolo");
+  pid_turn_by(-34);
+  printf("the secret recipe");
+  wait(1, sec);
+  //pid_drive(3);
+  pid_drive(-9);
+  wait(1, sec);
+  pid_turn_by(-45);
   pid_drive(-10);
-  wing2_move();
+  //wing2_move();
   pid_drive(10);
+
+
   pid_turn_by(-65);
   pid_drive(-17);
   pid_turn(30);
@@ -288,7 +298,7 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
   long loop_count = 0;
   double error = 5000;
   double total_error = 0;
-  double derivative = 0; //0.1
+  double derivative = 0.1;
   double prev_error = 0;
   double voltage = 0;
   double min_volt = 2.5;   // we don't want to apply less than min_volt, or else drivetrain won't move
@@ -303,7 +313,7 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
   //   current_space = dist_sensor.objectDistance(inches);
   // }
 
-  DEBUG_PRINT(PRINT_LEVEL_NORMAL, "Drive by distance %.2f, current_space %.2f, space %.2f\n", distance, current_space, space);
+  //DEBUG_PRINT(PRINT_LEVEL_NORMAL, "Drive by distance %.2f, current_space %.2f, space %.2f\n", distance, current_space, space);
   // keep turning until we reach desired angle +/- tolerance
   while ((error > drive_tolerance) && (PidDriveTimer.time(msec) < (start_time + time)) && (current_space >= space )) {
     current_rotation = (RightDriveSmart.position(turns) + LeftDriveSmart.position(turns)) / 2;
@@ -342,10 +352,9 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
   }
   RightDriveSmart.stop();
   LeftDriveSmart.stop();
-  DEBUG_PRINT(PRINT_LEVEL_DEBUG, "drive by distance %.2f, loop count %ld\n", distance, loop_count);
+  //DEBUG_PRINT(PRINT_LEVEL_DEBUG, "drive by distance %.2f, loop count %ld\n", distance, loop_count);
   return loop_count;
 }
-
 void inertial_test(void) {
   double inert = Inertia.rotation();
   printf("%2f\n", inert);
@@ -388,7 +397,7 @@ long pid_turn(double angle, double kp) {
       voltage = max_volt;
     }
     //DEBUG_PRINT(PRINT_LEVEL_DEBUG, "error %.2f, voltage %.2f, direction %d, rotation %.2f\n", error, voltage, direction, Inertia.rotation());
-    error = angle - Inertia.rotation();
+    //error = angle - Inertia.rotation();
     if (direction) {
       RightDriveSmart.spin(reverse, voltage, volt);
       LeftDriveSmart.spin(forward, voltage, volt);
@@ -400,9 +409,11 @@ long pid_turn(double angle, double kp) {
     wait(delay, msec);
     ++loop_count;
   }
+  printf("hello1");
   RightDriveSmart.stop();
   LeftDriveSmart.stop();
   //DEBUG_PRINT(PRINT_LEVEL_DEBUG, "Turn to angle %.2f, current angle %.2f, loop count %ld\n", angle, Inertia.rotation(), loop_count);
+  printf("hello2");
   return loop_count;
 }
 
