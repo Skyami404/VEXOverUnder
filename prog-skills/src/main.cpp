@@ -257,43 +257,31 @@ void autonomous(void) {
   //cata_load();
   printf("another one of me");
   pid_drive(-2);
-  pid_turn_by(35, 5000);
+  pid_turn_by(33, 5000);
   printf("joe");
-  pid_drive(-20, 3000, 0, 12);
-  wait(3, sec);
+  pid_drive(-22, 3000, 0, 12);
+  //wait(3, sec);
   pid_turn_by(-10, 3000);
-  pid_drive(-10);
+  pid_drive(-8, 1000, 0, 12);
   printf("yoloyolo");
-  pid_turn_by(-40, 1000);
+  pid_turn_by(-55, 5000);
   printf("the secret recipe");
   //wait(1, sec);
-  pid_drive(-12);
+  //pid_drive(-12);
   //wait(1, sec);
 
   //pid_turn_by(-45);
-  pid_drive(-10);
-  pid_drive(10);
-  return;
+  pid_drive(-12, 1000, 0, 12);
+  pid_drive(10, 1000, 0, 12);
+  
 
-  pid_turn_by(-65);
-  cata_loop();
-  wait(3.5, sec);
-  cata_loop();
-  pid_turn_by(42);
-  pid_drive(-14);
-  pid_turn_by(2);
-  pid_drive(-15);
-  pid_turn_by(-38);
-  pid_drive(-5);
-  pid_turn_by(-15);
-  //double_wing();
-  pid_drive(-10, 2000, 0, 20); 
-  pid_drive(10);
-  pid_turn_by(-60);
-  pid_drive(-17);
-  pid_turn_by(70);
+  pid_turn_by(-85);
+  pid_drive(15);
   double_wing();
-  pid_drive(-15, 3000, 0, 20);
+  pid_turn_by(90);
+  pid_drive(10, 800, 0, 20);
+  pid_drive(-10, 1000, 0, 12);
+  return;
 }
 // USER CONTROL
   

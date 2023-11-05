@@ -1,10 +1,10 @@
 {
 	"project": {
-		"name": "skills-rapid",
+		"name": "prog-skills",
 		"slot": 3,
 		"description": "Empty V5 C++ Project",
 		"platform": "V5",
-		"creationDate": "Sat, 30 Sep 2023 23:29:00 GMT",
+		"creationDate": "Sun, 05 Nov 2023 01:08:09 GMT",
 		"language": "cpp",
 		"sdkVersion": "V5_20220726_10_00_00",
 		"cpp": {
