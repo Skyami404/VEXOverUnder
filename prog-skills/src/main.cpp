@@ -25,8 +25,9 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 long pid_turn_by(double angle);
+long pid_turn(double angle);
 long pid_drive(double distance, int32_t time=60000, double space=0, double drivekp = 12);
-
+bool int_spin = false;
 bool vision_in_prog = false; 
 #define PRINT_LEVEL_MUST 0
 #define PRINT_LEVEL_NORMAL 1
@@ -51,10 +52,10 @@ bool vision_in_prog = false;
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  //Rotation.setPosition(0, degrees); // Rotation.resetPosition();
+  // Rotation.setPosition(0, degrees); // Rotation.resetPosition();
   Drivetrain.setDriveVelocity(100, percent);
-  cata.setVelocity(100, percent);
   Drivetrain.setStopping(hold);
+  cata.setVelocity(100, percent);
   Inertia.calibrate();
   
 }
@@ -71,13 +72,20 @@ void tdriverev(double rotation, double power, int32_t time) {
   Drivetrain.setDriveVelocity(power, percent);
   Drivetrain.driveFor(reverse, rotation, inches);
 }
-bool cat = false;
+
+// void arm(void) {
+//   arm.spinFor(120, degrees, true);
+// }
+
+
+
 // **** CATAPULT TESTING ****
+bool cat = false;
 void cata_loop(void) {
-  if (Debounce.value() < 0.1) {
+  if (DebounceTimer.value() < 0.1) {
       return;
     }
-  Debounce.reset();
+  DebounceTimer.reset();
   if (cat == false) {
     cata.spin(forward, 20, volt);
     cat = true;
@@ -88,27 +96,26 @@ void cata_loop(void) {
   }
   }
 
-
 void cata_load(void) {
-  if (Debounce.value() < 0.1) {
+  if (DebounceTimer.value() < 0.1) {
     return;
   }
-  Debounce.reset();
   cata.setVelocity(100, percent);
-  cata.spinFor(110, degrees, true);
+  cata.spinFor(190, degrees, true);
 }
 
 void cata_shoot(void) {
-  if (Debounce.value() < 0.1) {
+  if (DebounceTimer.value() < 0.1) {
     return;
   }
-  Debounce.reset();
   cata.setVelocity(100, percent);
-  cata.spinFor(250, degrees, true);  
+  cata.spinFor(175, degrees, true);  
 }
 
 void cata_adjust(void) {
-
+  if (DebounceTimer.value() < 0.1) {
+    return;
+  }
   cata.setVelocity(100, percent);
   cata.spinFor(10, degrees, true);
 }
@@ -125,58 +132,47 @@ void cata_stop(void) {
   cat = false;
 }
 
-void cata_rot(double deg) { // DON'T USE THIS
+// void cata_rot(double deg) { // DON'T USE THIS
+//   if (DebounceTimer.value() < 0.1) {
+//     return;
+//   }
+//   while (true) {
+//     if (deg > Rotation.position(degrees)) {
+//       cata.spin(forward, 5, volt); // direction may be wrong
+//     }
+//     else {
+//       cata.stop();
+//       break;
+//     }
+//   }
+// }
 
-  while (true) {
-    if (deg > Rotation.position(degrees)) {
-      cata.spin(forward, 5, volt); // direction may be wrong
-    }
-    else {
-      cata.stop();
-      break;
-    }
-  }
-}
 
-
-void cata_button() { // DON'T USE THIS
-  cata_rot(175); // change degrees depending on how far you need it to go
-}
+// void cata_button() { // DON'T USE THIS
+//   cata_rot(175); // change degrees depending on how far you need it to go
+// }
 
 // Intake Functions
-bool int_spin = false;
+
 void intake_spin(void) {
-  if (Debounce.value() < 0.1) {
-    return;
-  }
-  Debounce.reset();
   if (int_spin == false) {
     intake.spin(forward, 100, percent);
     int_spin = true;
-    printf("hi \n");
   }
-  else{
+  else if (int_spin == true) {
     intake.stop();
     int_spin = false;
-    printf("hi2 \n");
   }
 }
 
-bool int_spin2 = false;
 void intake_spin2(void) {
-  if (Debounce.value() < 0.1) {
-    return;
-  }
-  Debounce.reset();
-  if (int_spin2 == false) {
+  if (int_spin == false) {
     intake.spin(reverse, 100, percent);
-    int_spin2 = true;
-    printf("hello \n");
+    int_spin = true;
   }
-  else{
+  else if (int_spin == true) {
     intake.stop();
-    int_spin2 = false;
-    printf("hello2 \n");
+    int_spin = false;
   }
 }
 
@@ -187,10 +183,10 @@ void intake_stop(void) {
 // wings
 bool w1 = false;
 void wing1_move(void) {
-  if (Debounce.value() < 0.1) {
+  if (DebounceTimer.value() < 0.1) {
       return;
     }
-  Debounce.reset();
+  DebounceTimer.reset();
   if (w1 == false) {
     wing1.set(true);
     w1 = true;
@@ -203,10 +199,10 @@ void wing1_move(void) {
 
 bool w2 = false;
 void wing2_move(void) {
-  if (Debounce.value() < 0.1) {
+  if (DebounceTimer.value() < 0.1) {
       return;
     }
-  Debounce.reset();
+  DebounceTimer.reset();
   if (w2 == false) {
     wing2.set(true);
     w2 = true;
@@ -218,17 +214,17 @@ void wing2_move(void) {
 }
 
 void double_wing(void) {
-  if (Debounce.value() < 0.1) {
+  if (DebounceTimer.value() < 0.1) {
       return;
     }
-
+  DebounceTimer.reset();
   if (w1 == false && w2 == false) {
     wing1.set(true);
     w1 = true;
     wing2.set(true);
     w2 = true;
   }
-  
+
   else if(w1 == true && w2 == true) {
     wing1.set(false);
     w1 = false;
@@ -237,77 +233,66 @@ void double_wing(void) {
   }
 }
 
-// arm
-
 // void move_arm_down(void) {
 //   arm.setVelocity(100, percent);
-//   arm.setTimeout(1000, msec);
+//   arm.setTimeout(2, sec);
 //   arm.spinFor(forward, 135, degrees);
 // }
 
 // void move_arm_up(void) {
 //   arm.setVelocity(100, percent);
-//   arm.setTimeout(3000, msec);
+//   arm.setTimeout(3, sec);
 //   arm.spinFor(reverse, 135, degrees);
 // }
 
-//drives robot backward
-// rotation: how many turns of the wheel to travel backward
-// power: velocity of wheels in percentage
-void driveBackward(double rotation, double power, int32_t time) {
-  Drivetrain.setTimeout(time, msec);
-  Drivetrain.setDriveVelocity(power, percent);
-  Drivetrain.driveFor(reverse, rotation, inches);
-}
-
-//drives robot forward
-// rotation: how many turns of the wheel to travel backward
-// power: velocity of wheels in percentage
-void driveForward(double rotation, double power, int32_t time) {
-  Drivetrain.setTimeout(time, msec);
-  Drivetrain.setDriveVelocity(power, percent);
-  Drivetrain.driveFor(forward, rotation, inches);
-}
-
 void autonomous(void) {
-  intake.setVelocity(100, percent);
-  pid_drive(4, 800, 0, 20);
-  pid_turn_by(-28);
-  pid_drive(12.7, 2000, 0, 30);
-  pid_turn_by(125); // score preload + 2nd triball
-  wing2_move();
-  pid_turn_by(10);
-  intake.spin(forward);
-  wait(0.2, sec);
-  pid_drive(15, 800, 0, 200);
-  wing2_move();
-  pid_drive(-5);
-  pid_turn_by(-160);
-
-  //pid_drive(6, 1000, 0, 12);
-  intake.spin(reverse);
-  pid_drive(12, 750, 20); // pick up third triball
-  pid_turn_by(150); 
-  intake.spin(forward);
-  pid_drive(20, 1000, 0, 200); // score it
-
-  pid_drive(-5, 400, 0, 20);
-  pid_turn_by(125);
-  intake.spin(reverse);
-  pid_drive(20, 800, 0, 20); // pick up 4th triball
-  pid_turn_by(-130);
-  intake.spin(forward);
-  pid_drive(20, 1000, 0, 200); // score it
-  
-  pid_drive(-5);
-  pid_turn_by(180);
-  double_wing();
-  pid_drive(-8, 800);
-  pid_drive(5); 
-  
+  //pid_drive(-1);
+  //pid_turn_by(20);
+  int count = 0;
+  while (count < 5) {
+    cata.spinFor(forward, 360, degrees);
+    count ++;
   }
 
+  //cata_load();
+  printf("another one of me");
+  pid_drive(-2);
+  pid_turn_by(40);
+  printf("joe");
+  pid_drive(-28);
+  printf("yoloyolo");
+  pid_turn_by(-34);
+  printf("the secret recipe");
+  wait(1, sec);
+  //pid_drive(3);
+  pid_drive(-9);
+  wait(1, sec);
+  pid_turn_by(-45);
+  pid_drive(-10);
+  //wing2_move();
+  pid_drive(10);
 
+
+  pid_turn_by(-65);
+  cata_loop();
+  wait(3.5, sec);
+  cata_loop();
+  pid_turn_by(42);
+  pid_drive(-14);
+  pid_turn_by(2);
+  pid_drive(-15);
+  pid_turn_by(-38);
+  pid_drive(-5);
+  pid_turn_by(-15);
+  //double_wing();
+  pid_drive(-10, 2000, 0, 20); 
+  pid_drive(10);
+  pid_turn_by(-60);
+  pid_drive(-17);
+  pid_turn_by(70);
+  double_wing();
+  pid_drive(-15, 3000, 0, 20);
+}
 // USER CONTROL
   
 
@@ -379,6 +364,10 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
   return loop_count;
 }
 
+void inertial_test(void) {
+  double inert = Inertia.rotation();
+  printf("%2f\n", inert);
+}
 double turn_kp = 0.1; //1.5
 double turn_ki = 0.00000001; //0.0009
 double turn_kd = 0;
@@ -416,6 +405,8 @@ long pid_turn(double angle) {
       voltage = max_volt;
     }
     //DEBUG_PRINT(PRINT_LEVEL_DEBUG, "error %.2f, voltage %.2f, direction %d, rotation %.2f\n", error, voltage, direction, Inertia.rotation());
+
+    //error = angle - Inertia.rotation();
     if (direction) {
       RightDriveSmart.spin(reverse, voltage, volt);
       LeftDriveSmart.spin(forward, voltage, volt);
@@ -427,14 +418,17 @@ long pid_turn(double angle) {
     wait(delay, msec);
     ++loop_count;
   }
+  printf("hello1");
   RightDriveSmart.stop();
   LeftDriveSmart.stop();
   //DEBUG_PRINT(PRINT_LEVEL_DEBUG, "Turn to angle %.2f, current angle %.2f, loop count %ld\n", angle, Inertia.rotation(), loop_count);
+  printf("hello2");
   return loop_count;
 }
 
 long pid_turn_by (double angle) 
 {
+  
   return pid_turn(Inertia.rotation() + angle);
 }
 
@@ -492,8 +486,6 @@ void tune_turn_pid(void)
 // Main will set up the competition functions and callbacks.
 //
 
-
-
 void usercontrol(void) {
   // User control code here, inside the loop
 
@@ -504,8 +496,8 @@ void usercontrol(void) {
     double turnVal = Controller.Axis3.position(percent);
     double forwardVal = Controller.Axis1.position(percent);
 
-    double turnVolts = turnVal * -0.12;
-    double forwardVolts = forwardVal * 0.12* (1 - (abs(turnVolts)/12.0) * turnImportance);
+    double turnVolts = turnVal * -0.12 * (7/5);
+    double forwardVolts = forwardVal * 0.12 * (7/5) * (1 - (abs(turnVolts)/12.0) * turnImportance);
     if (turnVolts > 12) {
       turnVolts = 12;
     }
@@ -525,13 +517,14 @@ void usercontrol(void) {
   Controller.ButtonR2.pressed(cata_shoot);
   Controller.ButtonL1.pressed(intake_spin2);
   Controller.ButtonL2.pressed(intake_spin);
-  Controller.ButtonB.pressed(cata_loop);
+  Controller.ButtonA.pressed(cata_loop);
+  Controller.ButtonB.pressed(cata_stop);
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
-  Controller.ButtonA.pressed(wing1_move);
-  Controller.ButtonY.pressed(wing2_move);
-  Controller.ButtonX.pressed(double_wing);
+
+
+
 
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
