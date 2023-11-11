@@ -248,39 +248,48 @@ void double_wing(void) {
 void autonomous(void) {
   //pid_drive(-1);
   //pid_turn_by(20);
-  int count = 0;
-  while (count < 5) {
-    cata.spinFor(forward, 360, degrees);
-    count ++;
-  }
-
+  //int count = 0;
+  // while (count < 5) {
+  //   cata.spinFor(forward, 360, degrees);
+  //   count ++;
+  // }
+  cata.spin(forward, 12, volt);
+  wait(0.67*5, sec);
+  cata.stop();
   //cata_load();
   printf("another one of me");
   pid_drive(-2);
-  pid_turn_by(33, 5000);
+  pid_turn_by(30, 5000);
   printf("joe");
-  pid_drive(-22, 3000, 0, 12);
-  //wait(3, sec);
-  pid_turn_by(-10, 3000);
-  pid_drive(-8, 1000, 0, 12);
+  pid_drive(-29, 3000, 0, 12);
   printf("yoloyolo");
-  pid_turn_by(-55, 5000);
+  pid_turn_by(-50, 5000);
   printf("the secret recipe");
   //wait(1, sec);
   //pid_drive(-12);
   //wait(1, sec);
 
   //pid_turn_by(-45);
-  pid_drive(-12, 1000, 0, 12);
-  pid_drive(10, 1000, 0, 12);
+  pid_drive(-13, 1000, 0, 20);
+  pid_drive(5, 1000, 0, 12);
+  pid_drive(-6, 800, 0, 20);
+  pid_drive(8, 1000, 0, 12);
   
 
-  pid_turn_by(-85);
-  pid_drive(15);
+  pid_turn_by(-45);
+  pid_drive(-19);
   double_wing();
-  pid_turn_by(90);
-  pid_drive(10, 800, 0, 20);
-  pid_drive(-10, 1000, 0, 12);
+  pid_turn_by(100);
+  pid_drive(-10, 800, 0, 20);
+  pid_drive(5, 1000, 0, 12);
+  pid_drive(-6, 800, 0, 20);
+  pid_drive(6, 1000, 0, 12);
+
+  pid_turn_by(-63);
+  pid_drive(-16);
+  pid_turn_by(120);
+  pid_drive(-13, 1000, 0, 20);
+  pid_drive(10, 1000, 0, 12);
   return;
 }
 // USER CONTROL
