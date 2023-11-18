@@ -259,11 +259,13 @@ void autonomous(void) {
   //cata_load();
   printf("another one of me");
   pid_drive(-2);
-  pid_turn_by(30, 5000);
+  pid_turn_by(32, 5000);
   printf("joe");
-  pid_drive(-29, 3000, 0, 12);
+  // pid_drive(-8, 3000, 0, 12);
+  // pid_turn_by(-2);
+  pid_drive(-28, 3000, 0, 12);
   printf("yoloyolo");
-  pid_turn_by(-50, 5000);
+  pid_turn_by(-53, 5000);
   printf("the secret recipe");
   //wait(1, sec);
   //pid_drive(-12);
@@ -272,22 +274,35 @@ void autonomous(void) {
   //pid_turn_by(-45);
   pid_drive(-13, 1000, 0, 20);
   pid_drive(5, 1000, 0, 12);
+  pid_turn_by(-17);
   pid_drive(-6, 800, 0, 20);
   pid_drive(8, 1000, 0, 12);
   
 
-  pid_turn_by(-45);
-  pid_drive(-19);
+  pid_turn_by(-55);
+  pid_drive(-15);
   double_wing();
+  pid_turn_by(100);
+  pid_drive(-12, 800, 0, 20);
+  pid_drive(5, 1000, 0, 12);
+  pid_drive(-6, 800, 0, 20);
+  pid_drive(6, 1000, 0, 12);
+
+  pid_turn_by(-100);
+  pid_drive(-6);
   pid_turn_by(100);
   pid_drive(-10, 800, 0, 20);
   pid_drive(5, 1000, 0, 12);
   pid_drive(-6, 800, 0, 20);
   pid_drive(6, 1000, 0, 12);
+  double_wing();
 
-  pid_turn_by(-63);
-  pid_drive(-16);
-  pid_turn_by(120);
+  pid_turn_by(-68);
+  pid_drive(-15);
+  pid_turn_by(125);
+  pid_drive(-13, 1000, 0, 20);
+  pid_drive(10, 1000, 0, 12);
+  pid_turn_by(20);
   pid_drive(-13, 1000, 0, 20);
   pid_drive(10, 1000, 0, 12);
   return;
