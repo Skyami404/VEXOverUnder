@@ -85,7 +85,7 @@ void cata_loop(void) {
     cata.stop();
     cat = false;
   }
-  }
+}
 
 
 
@@ -280,7 +280,8 @@ void autonomous(void) {
   driveForward(6, 100, 500);
   intake.stop();
   wait(0.05, sec);
-  pid_drive(-6.8, 1000); //-3
+  pid_turn_by(-6.5);
+  pid_drive(-6.5, 1000, 14); //-8
   /*
   pid_turn_by(-15);
   wait(0.01, sec);
@@ -290,12 +291,12 @@ void autonomous(void) {
   //pid_turn_by(-40); //-30
   intake.spin(reverse); // pick up second triball
   //pid_drive(-10, 400);
-  pid_turn_by(-68); //-50
-  pid_drive(8, 500);
-  pid_drive(-3, 500); //-5
-  pid_turn_by(76); //90
+  pid_turn_by(-72); //-50
+  pid_drive(9.5, 500);
+  pid_drive(-4, 500); //-5
+  pid_turn_by(75); //90
 
-  pid_drive(10, 1200); // score it //11
+  pid_drive(8.5, 600, 0, 30); // score it 
   intake.spin(forward);
   wait(200, msec);
   pid_drive(-3, 800, 0, 20);
@@ -303,10 +304,10 @@ void autonomous(void) {
 
   pid_drive(-3, 800); //-6
 
-  pid_turn_by(-89); //-85
+  pid_turn_by(-87); //-85
 
-  pid_drive(-19, 1000, 20); // touch elevation bar 
-  pid_turn_by(-88);
+  pid_drive(-20, 1000, 20); // touch elevation bar 
+  pid_turn_by(-88.25);
   cata_shoot();
   intake.spin(reverse);
   pid_drive(12, 1000, 0, 20);

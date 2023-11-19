@@ -296,7 +296,7 @@ void autonomous(void) {
   pid_drive(-4, 500); //-5
   pid_turn_by(75); //90
 
-  pid_drive(8.5, 600, 0, 30); // score it //11
+  pid_drive(8.5, 600, 0, 30); // score it 
   //intake.spin(forward);
   //wait(200, msec);
   intake.spin(forward);
@@ -310,13 +310,13 @@ void autonomous(void) {
   //wait(200, msec);
 
 
-  pid_turn_by(126);
+  pid_turn_by(132);
   intake.spin(reverse);
   pid_drive(9, 800, 0, 30); //move to pick up third triball
   pid_drive(-2, 500, 0, 15);
   //wait(0.05, sec);
-  pid_turn_by(142); //95
-  pid_drive(11, 800, 0, 40);
+  pid_turn_by(165); //95
+  pid_drive(12, 800, 0, 40);
   intake.spin(forward); //outtakes triball
   //pid_drive(6, 400, 0, 40); //pushes it inside
   pid_drive(-2, 800, 0, 40); //goes out to make sure that the robot doesnt touch triball and ->
