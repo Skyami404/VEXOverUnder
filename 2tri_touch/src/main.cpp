@@ -277,10 +277,10 @@ void autonomous(void) {
   intake.spin(forward, 10, volt); // score preload
   wait(400, msec);
   //pid_drive(6, 1000, 0, 12);
-  driveForward(6, 100, 500);
+  pid_drive(4, 600, 0, 20);
   intake.stop();
   wait(0.05, sec);
-  pid_turn_by(-15);
+  pid_turn_by(-12);
   pid_drive(-6.5, 1000, 14); //-8
   /*
   pid_turn_by(-15);
