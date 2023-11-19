@@ -269,11 +269,12 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
-  cata.spin(forward, 12, volt);
-  wait(0.75, sec);
-  pid_turn_by(30);
-  cata.spinFor(forward, 50, degrees);
-  pid_drive(14, 3000, 0, 8);
+  // cata.spin(forward, 12, volt);
+  // wait(800, msec);
+  // cata.stop();
+  cata_load();
+  pid_turn_by(31.5);
+  pid_drive(-15, 3000, 0, 8);
   }
 
 
