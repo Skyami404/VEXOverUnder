@@ -265,7 +265,7 @@ void autonomous(void) {
   // pid_turn_by(-2);
   pid_drive(-10, 6000, 0, 12);
   //printf("IS THIS TURNING???");
-  pid_turn_by(-10); //-7
+  pid_turn_by(-15); //-7
   //printf("STOP BEING WEIRD");
   pid_drive(-17, 3000, 0, 20);
   printf("yoloyolo");
@@ -305,7 +305,8 @@ void autonomous(void) {
   pid_drive(-9, 800, 0, 30);
   pid_drive(6, 1000, 0, 30);
   double_wing();
-
+  return;
+  
   pid_turn_by(-55, 1000);
   pid_drive(-15);
   pid_turn_by(150, 1200);
