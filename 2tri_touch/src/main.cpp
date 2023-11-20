@@ -78,7 +78,7 @@ void cata_loop(void) {
     }
   Debounce.reset();
   if (cat == false) {
-    cata.spin(forward, 11, volt);
+    cata.spin(forward, 12, volt);
     cat = true;
   }
   else if (cat == true){
@@ -277,10 +277,10 @@ void autonomous(void) {
   intake.spin(forward, 10, volt); // score preload
   wait(400, msec);
   //pid_drive(6, 1000, 0, 12);
-  pid_drive(4, 600, 0, 20);
+  driveForward(8, 100, 1000);
   intake.stop();
   wait(0.05, sec);
-  //pid_turn_by(-8);
+  pid_turn_by(-6.5);
   pid_drive(-6.5, 1000, 14); //-8
   /*
   pid_turn_by(-15);
@@ -291,21 +291,23 @@ void autonomous(void) {
   //pid_turn_by(-40); //-30
   intake.spin(reverse); // pick up second triball
   //pid_drive(-10, 400);
-  pid_turn_by(-72); //-50
+  pid_turn_by(-85); //-50
   pid_drive(9.5, 500);
   pid_drive(-4, 500); //-5
-  pid_turn_by(75); //90
+  pid_turn_by(80); //90
 
   pid_drive(8.5, 600, 0, 30); // score it 
+  //intake.spin(forward);
+  //wait(200, msec);
   intake.spin(forward);
-  wait(200, msec);
-  pid_drive(-3, 800, 0, 20);
-  pid_drive(7, 800, 0, 20); //10
+  wait(0.1, sec);
+  pid_drive(-3, 800, 0, 30);
+  pid_drive(7, 800, 0, 30); //10
 
   pid_drive(-3, 800); //-6
 
-  pid_turn_by(-70); //-85
-  pid_drive(-21, 3000, 0, 20);
+  pid_turn_by(-90); //-85
+  pid_drive(-19, 3000, 0, 20);
   pid_turn_by(-90);
   cata_shoot();
   intake.spin(reverse);
