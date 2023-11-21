@@ -272,7 +272,7 @@ void autonomous(void) {
   intake.setVelocity(100, percent);
   pid_drive(5, 1000, 0, 100);
   pid_turn_by(-12);
-  pid_drive(7.5, 1000, 0, 100);
+  pid_drive(7.5, 1000, 0, 100); //7.5
   pid_turn_by(90);
   intake.spin(forward, 10, volt); // score preload
   wait(400, msec);

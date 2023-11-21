@@ -253,46 +253,54 @@ void autonomous(void) {
   //   cata.spinFor(forward, 360, degrees);
   //   count ++;
   // }
-  // cata.spin(forward, 11, volt); // shoot triballs
-  // wait(31, sec);
-  // cata.stop();
+  pid_drive(3);
+  pid_turn_by(-33);
+  cata.spin(forward, 11, volt); // shoot triballs
+  wait(31.3, sec);
+  cata.stop();
   //cata_load();
   printf("another one of me");
   pid_drive(-2);
-  pid_turn_by(35, 5000);
+
+  //cata.spinFor(forward, 180, degrees);
+  pid_turn_by(44, 5000);
+  // cata_load();
   printf("joe");
   // pid_drive(-8, 3000, 0, 12);
   // pid_turn_by(-2);
-  pid_drive(-10, 6000, 0, 12);
+  pid_drive(-9, 6000, 0, 12);
   //printf("IS THIS TURNING???");
-  pid_turn_by(-18); //-7
+  pid_turn_by(-24); //-7
   //printf("STOP BEING WEIRD");
-  pid_drive(-18, 3000, 0, 20); // cross under elevation bar
+  pid_drive(-20, 3000, 0, 25); // cross under elevation bar
   printf("yoloyolo");
-
-  pid_turn_by(-40, 5000); // position to push on right side
+  //wing2_move();
+  pid_turn_by(-43, 5000); // position to push on right side
   printf("the secret recipe");
   //wait(1, sec);
   //pid_drive(-12);
   //wait(1, sec);
 
   //pid_turn_by(-45);
-  pid_drive(-7, 1000, 0, 60); // push triballs
+  pid_drive(-7, 1000, 0, 100); // push triballs
   pid_turn_by(-25, 1000);
-  pid_drive(-7, 1000, 0, 60);
+  pid_drive(-7, 1000, 0, 100);
   pid_drive(4, 1000, 0, 20);
   pid_turn_by(-18);
-  pid_drive(-10, 800, 0, 60);
-  pid_drive(4, 1000, 0, 12);
+  pid_drive(-10, 800, 0, 100);
+  pid_drive(4, 1000, 0, 20);
   pid_turn_by(-7);
-  pid_drive(-9, 1000, 0, 60);
+  pid_drive(-9, 1000, 0, 100);
   pid_drive(4, 1000, 0, 30);
-  pid_drive(-9, 1000, 0, 60);
-  pid_drive(6, 1000, 0, 30);
-  
+  pid_turn_by(-7);
+  pid_drive(-9, 1000, 0, 100);
+  pid_drive(4, 1000, 0, 30);
+  pid_drive(-9, 1000, 0, 100);
+  pid_drive(8, 1000, 0, 30);
+  //wing2_move();
 
   pid_turn_by(-59, 2000); // position to go to middle to push triballs
-  pid_drive(-13, 1000, 0, 30); 
+  pid_drive(-16, 1000, 0, 30); 
   pid_turn_by(110, 1200);
   double_wing();
   pid_drive(-15, 800, 0, 60); //-17 // push triballs
@@ -305,10 +313,13 @@ void autonomous(void) {
   pid_drive(-9.5); //-6
   double_wing();
   pid_turn_by(107, 1200); //100
-  pid_drive(-12, 800, 0, 30);
-  pid_drive(8, 1000, 0, 30);
-  pid_drive(-9, 800, 0, 30);
-  pid_drive(6, 1000, 0, 30);
+  pid_drive(-12, 800, 0, 50);
+  pid_drive(4, 1000, 0, 30);
+  pid_drive(-9, 800, 0, 50);
+  pid_drive(4, 1000, 0, 30);
+  pid_turn_by(5);
+  pid_drive(-9, 800, 0, 50);
+  pid_drive(4, 1000, 0, 30);
   double_wing();
   return;
   
