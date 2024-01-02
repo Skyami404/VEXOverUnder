@@ -26,6 +26,7 @@ using namespace vex;
 competition Competition;
 long pid_turn_by(double angle);
 long pid_drive(double distance, int32_t time=60000, double space=0, double drivekp = 12);
+
 bool vision_in_prog = false; 
 #define PRINT_LEVEL_MUST 0
 #define PRINT_LEVEL_NORMAL 1
@@ -78,15 +79,14 @@ void cata_loop(void) {
     }
   Debounce.reset();
   if (cat == false) {
-    cata.spin(forward, 11, volt);
+    cata.spin(forward, 20, volt);
     cat = true;
   }
   else if (cat == true){
     cata.stop();
     cat = false;
   }
-}
-
+  }
 
 
 void cata_load(void) {
@@ -122,7 +122,7 @@ void cata_down30(void) { // DON'T USE THIS
 }
 
 void cata_stop(void) {
-  cata.stop();
+  cat = false;
 }
 
 void cata_rot(double deg) { // DON'T USE THIS
@@ -269,12 +269,19 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
-  // cata.spin(forward, 12, volt);
-  // wait(800, msec);
-  // cata.stop();
-  cata_load();
-  pid_turn_by(31.5);
-  pid_drive(-15, 3000, 0, 8);
+
+  pid_drive(-4, 750, 0, 30);
+  wing1_move();
+  pid_drive(-6, 750, 0, 30);
+  pid_turn_by(45);
+  wing1_move();
+  pid_turn_by(180);
+  pid_drive(10, 750, 0, 30);
+  pid_drive(-5);
+  pid_turn_by(-45);
+  pid_drive(10);
+  pid_turn_by(-45);
+  pid_drive(20);
   }
 
 
@@ -500,6 +507,7 @@ void usercontrol(void) {
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
   Controller.ButtonA.pressed(wing1_move);
+
   Controller.ButtonY.pressed(wing2_move);
   Controller.ButtonX.pressed(double_wing);
 

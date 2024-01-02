@@ -221,14 +221,14 @@ void double_wing(void) {
   if (Debounce.value() < 0.1) {
       return;
     }
-
+  Debounce.reset();
   if (w1 == false && w2 == false) {
     wing1.set(true);
     w1 = true;
     wing2.set(true);
     w2 = true;
   }
-  
+
   else if(w1 == true && w2 == true) {
     wing1.set(false);
     w1 = false;
@@ -236,7 +236,6 @@ void double_wing(void) {
     w2 = false;
   }
 }
-
 // arm
 
 // void move_arm_down(void) {
@@ -271,40 +270,19 @@ void driveForward(double rotation, double power, int32_t time) {
 
 void autonomous(void) {
   intake.setVelocity(100, percent);
-  pid_drive(4, 800, 0, 20);
-  pid_turn_by(-28);
-  pid_drive(12.7, 2000, 0, 30);
-  pid_turn_by(125); // score preload + 2nd triball
-  wing2_move();
-  pid_turn_by(10);
-  intake.spin(forward);
+  pid_drive(24, 1500, 0, 100);
   wait(0.2, sec);
-  pid_drive(15, 800, 0, 200);
+  intake.spin(forward); // drop 1st triball
+  wait(0.2, sec);
+  intake.stop();
+  pid_turn_by(-90);
+  intake.spin(reverse); // pick up second triball
+  pid_drive(15, 1000, 20);
   wing2_move();
-  pid_drive(-5);
-  pid_turn_by(-160);
-
-  //pid_drive(6, 1000, 0, 12);
-  intake.spin(reverse);
-  pid_drive(12, 750, 20); // pick up third triball
-  pid_turn_by(150); 
-  intake.spin(forward);
-  pid_drive(20, 1000, 0, 200); // score it
-
-  pid_drive(-5, 400, 0, 20);
-  pid_turn_by(125);
-  intake.spin(reverse);
-  pid_drive(20, 800, 0, 20); // pick up 4th triball
-  pid_turn_by(-130);
-  intake.spin(forward);
-  pid_drive(20, 1000, 0, 200); // score it
-  
-  pid_drive(-5);
-  pid_turn_by(180);
-  double_wing();
-  pid_drive(-8, 800);
-  pid_drive(5); 
-  
+  pid_turn_by(110);
+  pid_drive(10, 1000, 0, 20);
+  pid_turn_by(45);
+  pid_drive(15, 1000);
   }
 
 
@@ -530,6 +508,7 @@ void usercontrol(void) {
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
   Controller.ButtonA.pressed(wing1_move);
+
   Controller.ButtonY.pressed(wing2_move);
   Controller.ButtonX.pressed(double_wing);
 
