@@ -269,13 +269,15 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
-
-  pid_drive(-4, 750, 0, 30);
   wing1_move();
-  pid_drive(-6, 750, 0, 30);
+  pid_drive(-8, 750, 0, 30);
   pid_turn_by(45);
+  wait(0.2, sec);
+  Drivetrain.stop();
   wing1_move();
-  pid_turn_by(180);
+  pid_drive(5, 600, 0, 12);
+
+  return;
   pid_drive(10, 750, 0, 30);
   pid_drive(-5);
   pid_turn_by(-45);
