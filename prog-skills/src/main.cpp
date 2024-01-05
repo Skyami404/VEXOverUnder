@@ -253,26 +253,26 @@ void autonomous(void) {
   //   cata.spinFor(forward, 360, degrees);
   //   count ++;
   // }
-  pid_drive(3);
   pid_turn_by(-33);
+  pid_drive(5, 500);
   cata.spin(forward, 11, volt); // shoot triballs
-  wait(31.3, sec);
+  wait(5, sec);
   cata.stop();
   //cata_load();
   printf("another one of me");
   pid_drive(-2);
 
   //cata.spinFor(forward, 180, degrees);
-  pid_turn_by(44, 5000);
+  pid_turn_by(34, 5000);
   // cata_load();
   printf("joe");
   // pid_drive(-8, 3000, 0, 12);
   // pid_turn_by(-2);
-  pid_drive(-9, 6000, 0, 12);
+  //pid_drive(-9, 6000, 0, 12);
   //printf("IS THIS TURNING???");
-  pid_turn_by(-24); //-7
+  //pid_turn_by(-10); //-7
   //printf("STOP BEING WEIRD");
-  pid_drive(-20, 3000, 0, 25); // cross under elevation bar
+  pid_drive(-40, 3000, 0, 25); // cross under elevation bar
   printf("yoloyolo");
   //wing2_move();
   pid_turn_by(-43, 5000); // position to push on right side
