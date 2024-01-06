@@ -232,6 +232,22 @@ void double_wing(void) {
     w2 = false;
   }
 }
+//blocker
+bool block = false;
+void block_move(void) {
+  if (Debounce.value() < 0.1) {
+      return;
+    }
+  Debounce.reset();
+  if (block == false) {
+    blocker.set(true);
+    block = true;
+  }
+  else {
+    blocker.set(false);
+    block = false;
+  }
+}
 
 // void move_arm_down(void) {
 //   arm.setVelocity(100, percent);
@@ -561,6 +577,7 @@ void usercontrol(void) {
   Controller.ButtonA.pressed(cata_loop);
   Controller.ButtonB.pressed(cata_stop);
   Controller.ButtonRight.pressed(cata_adjust);
+  Controller.ButtonUp.pressed(block_move);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
 

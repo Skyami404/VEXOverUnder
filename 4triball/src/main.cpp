@@ -236,6 +236,24 @@ void double_wing(void) {
     w2 = false;
   }
 }
+
+// blocker
+bool block = false;
+void block_move(void) {
+  if (Debounce.value() < 0.1) {
+      return;
+    }
+  Debounce.reset();
+  if (block == false) {
+    blocker.set(true);
+    block = true;
+  }
+  else {
+    blocker.set(false);
+    block = false;
+  }
+}
+
 // arm
 
 // void move_arm_down(void) {
@@ -531,7 +549,7 @@ void usercontrol(void) {
 
   Controller.ButtonY.pressed(wing2_move);
   Controller.ButtonX.pressed(double_wing);
-
+  Controller.ButtonUp.pressed(block_move);
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.
