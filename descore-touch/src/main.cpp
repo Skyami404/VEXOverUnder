@@ -286,20 +286,57 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
-  wing1_move();
-  pid_drive(-6, 500, 0, 100);
+  wing2_move();
+  pid_drive(-8, 1000, 0, 100);
   //pid_turn_by(45);
-  wing1_move();
-  pid_turn_by(15);
-  pid_drive(5, 600, 0, 12);
+  wing2_move();
+  printf("is this working\n");
+  //Drivetrain.turnFor(-45, deg, 100);
+  pid_drive(14, 1000, 0, 20);
+  pid_turn_by(111);
+  pid_drive(-20, 2000, 0, 20);
+  wait(1, sec);
+  wing2_move();
+  pid_turn_by(20);
+  wait(1, sec);
 
   return;
+  printf("IS THIS AT LEAST WORKING??\n");
+  pid_drive(5, 200, 0, 20);
+  pid_turn_by(-45);
+  pid_drive(-12, 300, 0, 20);
+  pid_turn_by(-20);
+  pid_drive(-10, 300, 0, 20);
+
+  return;
+
+  pid_turn_by(-45);
+  pid_drive(30, 600, 0, 20);
+  return;
+
+  pid_drive(-10, 600, 0, 12);
+  pid_turn_by(35);
+  pid_drive(-7, 600, 0, 12); //5
+
+  pid_drive(15, 600, 0, 20);
+  pid_turn_by(95);
+  pid_drive(30, 2000, 0, 20);
+
+  return;
+  pid_drive(2, 200, 0, 20);
+  pid_turn_by(-10);
   pid_drive(10, 750, 0, 30);
+
+  pid_turn_by(80);
+  pid_drive(30, 2000, 0, 20);
+
+  /*
   pid_drive(-5);
   pid_turn_by(-45);
   pid_drive(10);
   pid_turn_by(-45);
   pid_drive(20);
+  */
   }
 
 

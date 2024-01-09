@@ -289,37 +289,54 @@ void driveForward(double rotation, double power, int32_t time) {
 void autonomous(void) {
   intake.setVelocity(50, percent);
   Drivetrain.setStopping(hold);
+  pid_turn_by(-8);
   pid_drive(25, 1500, 0, 100);
   wait(0.1, sec);
   intake.spin(forward); // drop 1st triball
+
   wait(0.2, sec);
   intake.stop();
   pid_drive(-4);
   pid_turn_by(-82);
   intake.setVelocity(100, percent);
-  intake.spin(reverse); // pick up second triball
+  intake.spin(reverse); //picks up third triball
   pid_drive(16, 1000, 20);
   pid_drive(-1);
+
   pid_turn_by(92);
-  pid_drive(10, 1000, 0, 20);
-  wing1_move();
+  //wait(1, sec);
+
+  pid_drive(8, 1000, 0, 20); //10
+  wing1_move(); //open one wing
   wait(0.2, sec);
+
   pid_turn_by(90);
+  //wait(1, sec);
+
   intake.spin(forward);
   pid_drive(20, 2000, 0, 50);
-  pid_drive(-8, 1000, 0, 500);
+  pid_drive(-13, 1000, 0, 500);
+  wing2_move(); //open other wing
+  //double_wing(); //open both wings
   // wing1_move();
   // wait(0.1, sec);
-  pid_turn_by(180);
+  pid_turn_by(170); //175
   // wing1_move();
   // wait(0.1, sec);
   pid_drive(-20, 1000, 0, 50);
   pid_drive(5);
-  wing1_move();
-  pid_turn_by(80);
-  pid_drive(-26, 2000, 0, 50);
+  double_wing(); //close both wings
+  //wing1_move();
+
+  pid_turn_by(65); //67
+
+  /*
+  pid_drive(-29, 2000, 0, 50);
   pid_turn_by(85);
-  pid_drive(-18, 1000);
+  pid_drive(-23, 1000);
+  
+  cut code - uncomment after match with team a 
+  */ 
 
   }
 
