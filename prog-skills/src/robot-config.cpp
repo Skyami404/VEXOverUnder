@@ -20,7 +20,10 @@ motor R1 = motor(PORT2, ratio18_1, false);
 motor R2 = motor(PORT3, ratio18_1, false);
 motor_group RightDriveSmart = motor_group(R1, R2);
 
-motor cata = motor(PORT8, ratio36_1, true);
+motor cata1 = motor(PORT8, ratio36_1, true);
+motor cata2 = motor(PORT5, ratio36_1, false);
+motor_group cata = motor(cata1, cata2);
+
 motor intake = motor(PORT1, ratio18_1, true);
 motor climb_m = motor(PORT20, ratio36_1, true); 
 //motor arm = motor(PORT7, ratio18_1, false);
