@@ -266,7 +266,7 @@ void autonomous(void) {
   pid_turn_by(-29, 1000); //-27  //-38
   pid_drive(2, 500); //7
   cata.spin(forward, 15, volt); // shoot triballs
-  wait(35.2, sec); //35.2 REMEMEBR TO CHANGE
+  wait(35, sec); //35.2 REMEMEBR TO CHANGE
   cata.stop();
   //cata_load();
   printf("another one of me");
