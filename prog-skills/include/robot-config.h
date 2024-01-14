@@ -9,9 +9,17 @@ extern controller Controller;
 extern drivetrain Drivetrain;
 extern motor_group LeftDriveSmart;
 extern motor_group RightDriveSmart;
+<<<<<<< HEAD
 extern motor cata1;
 extern motor cata2;
 extern motor_group cata;
+=======
+
+extern motor cata1;
+extern motor cata2;
+extern motor_group cata;
+
+>>>>>>> c74bc7051c87b36cc2197f3ec26952fe210ee17c
 extern motor intake;
 extern motor arm;
 extern motor climb_m;

@@ -22,8 +22,12 @@ motor_group RightDriveSmart = motor_group(R1, R2);
 
 motor cata1 = motor(PORT8, ratio36_1, true);
 motor cata2 = motor(PORT5, ratio36_1, false);
+<<<<<<< HEAD
 motor_group cata = motor_group(cata1, cata2);
 
+=======
+motor_group cata = motor(cata1, cata2);
+>>>>>>> c74bc7051c87b36cc2197f3ec26952fe210ee17c
 
 motor intake = motor(PORT1, ratio18_1, true);
 motor climb_m = motor(PORT20, ratio36_1, true); 
