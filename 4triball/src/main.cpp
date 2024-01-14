@@ -328,15 +328,16 @@ void autonomous(void) {
   double_wing(); //close both wings
   //wing1_move();
 
-  pid_turn_by(65); //67
+  pid_turn_by(90); //67
 
-  /*
-  pid_drive(-29, 2000, 0, 50);
-  pid_turn_by(85);
-  pid_drive(-23, 1000);
   
-  cut code - uncomment after match with team a 
-  */ 
+  pid_drive(-29, 2000, 0, 50);
+  pid_turn_by(87);
+  wing1_move();
+  pid_drive(-21, 1000);
+  
+  
+  
 
   }
 

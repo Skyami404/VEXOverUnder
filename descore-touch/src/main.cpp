@@ -287,8 +287,10 @@ void driveForward(double rotation, double power, int32_t time) {
 
 void autonomous(void) {
   wing2_move();
-  pid_drive(-8, 1000, 0, 100);
+  //wait(1, sec);
+  pid_drive(-10, 1000, 0, 100);
   //pid_turn_by(45);
+  wait(1, sec);
   wing2_move();
   printf("is this working\n");
   //Drivetrain.turnFor(-45, deg, 100);
