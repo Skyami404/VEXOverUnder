@@ -263,17 +263,17 @@ void block_move(void) {
 
 void autonomous(void) {
   pid_drive(8, 500); 
-  pid_turn_by(-29, 1000); //-27  //-38
+  pid_turn_by(-31, 1000); //-29
   pid_drive(2, 500); //7
   cata.spin(forward, 15, volt); // shoot triballs
-  wait(35, sec); //35.2 REMEMEBR TO CHANGE
+  wait(2, sec); //30 not 35 anymore REMEMEBR TO CHANGE
   cata.stop();
   //cata_load();
   printf("another one of me");
   pid_drive(-2);
 
   //cata.spinFor(forward, 180, degrees);
-  pid_turn_by(38, 5000);
+  pid_turn_by(39, 5000); //38
   // cata_load();
   printf("joe");
 
@@ -290,7 +290,7 @@ void autonomous(void) {
   pid_drive(-25, 2000); //-25
   printf("what is this\n");
 
-  pid_turn_by(-60, 1000); // position to push on right side //-67
+  pid_turn_by(-60, 500); // position to push on right side //-67
 
   printf("the secret recipe");
 
@@ -314,7 +314,7 @@ void autonomous(void) {
   pid_drive(-9, 1000, 0, 100);
   pid_drive(8, 1000, 0, 30);
   */
-  wing2_move();
+  wing2_move(); //close wing
 
   //double_wing(); //close both wings
   pid_turn_by(-68, 1000); // position to go to middle to push triballs //-73
@@ -331,12 +331,12 @@ void autonomous(void) {
   pid_drive(-17, 800, 0, 60); //-15 // push triballs
   pid_drive(4, 1000, 0, 30);
   pid_drive(-12, 800, 0, 30);
-  pid_drive(13, 1000, 0, 30); //6
+  pid_drive(15, 1000, 0, 30); //13
   double_wing(); //close both wings 
 
-  pid_turn_by(-80, 1200); //-85 // push triballs
-  pid_drive(-15); //-9.5 //FIX THIS
-  pid_turn_by(95, 1200); //107
+  pid_turn_by(-100, 1200); //-85 // push triballs //-80
+  pid_drive(-10); //-15 //FIX THIS
+  pid_turn_by(97, 1200); //95
   double_wing(); //open both wings
   pid_drive(-17, 800, 0, 50); //-12
   pid_drive(4, 1000, 0, 30);
@@ -345,7 +345,16 @@ void autonomous(void) {
   pid_turn_by(5);
   pid_drive(-12, 800, 0, 50);
   pid_drive(14, 1000, 0, 30);
-  double_wing(); //close both wings
+  //double_wing(); //close both wings
+
+  pid_turn_by(-45);
+  pid_drive(-33, 1500, 0, 20);
+  pid_turn_by(87);
+  pid_drive(-17, 1000, 0, 20);
+  pid_drive(7, 500, 0, 20);
+  pid_drive(-10, 500, 0, 20);
+  pid_drive(5, 500, 0, 20);
+
   return;
   
   pid_turn_by(-55, 1000);
