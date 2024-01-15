@@ -266,26 +266,26 @@ void autonomous(void) {
   pid_turn_by(-31, 1000); //-29
   pid_drive(2, 500); //7
   cata.spin(forward, 12, volt); // shoot triballs
-  wait(30, sec); //30 not 35 anymore REMEMEBR TO CHANGE
+  wait(2, sec); //30 
   cata.stop();
   //cata_load();
   printf("another one of me");
   pid_drive(-2);
 
   //cata.spinFor(forward, 180, degrees);
-  pid_turn_by(39, 5000); //38
+  pid_turn_by(43, 5000); //39
   // cata_load();
   printf("joe");
 
-  pid_drive(-37, 3000, 0, 25); // cross under elevation bar //-35 
+  pid_drive(-30, 3000, 0, 25); // cross under elevation bar //-35 
 
   pid_turn_by(-15); //-2
   //wait(5, sec);
-  pid_drive(-13, 3000, 0, 25); //-10
+  pid_drive(-20, 3000, 0, 25); //-10
   printf("yoloyolo\n");
   //wing2_move();
 
-  pid_turn_by(-30, 1000); //-12
+  pid_turn_by(-25, 1000); //-12
   //wait(5, sec);
   pid_drive(-25, 2000); //-25
   printf("what is this\n");
@@ -335,9 +335,9 @@ void autonomous(void) {
   pid_drive(15, 1000, 0, 30); //13
   //double_wing(); //close both wings 
 
-  pid_turn_by(-100, 1200); //-85 // push triballs //-80
-  pid_drive(-12); //-10 //FIX THIS
-  pid_turn_by(94, 1200); //97
+  pid_turn_by(-95, 1200); //-85 // push triballs //-80
+  pid_drive(-10.5); //-10 //FIX THIS
+  pid_turn_by(95, 1200); //97
   double_wing(); //open both wings
   pid_drive(-17, 800, 0, 50); //-12
   pid_drive(4, 1000, 0, 30);
@@ -348,7 +348,7 @@ void autonomous(void) {
   pid_drive(14, 1000, 0, 30);
   double_wing(); //close both wings
 
-  pid_turn_by(-50);
+  pid_turn_by(-55);
   pid_drive(-33, 1500, 0, 20);
   pid_turn_by(87);
   pid_drive(8, 500, 0, 20);
