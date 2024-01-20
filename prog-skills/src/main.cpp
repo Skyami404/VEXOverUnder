@@ -266,7 +266,7 @@ void autonomous(void) {
   pid_turn_by(-29, 1000); //-29
   pid_drive(2, 500); //7
   cata.spin(forward, 12, volt); // shoot triballs
-  wait(2, sec); //30 
+  wait(30, sec); //30 
   cata.stop();
   //cata_load();
   printf("another one of me");
@@ -348,7 +348,7 @@ void autonomous(void) {
   //wing1_move(); //close both wings
   double_wing();
 
-  pid_turn_by(-65); //-47
+  pid_turn_by(-60); //-47
   pid_drive(-33, 1500, 0, 20);
   pid_turn_by(87);
   pid_drive(-8, 500, 0, 20);

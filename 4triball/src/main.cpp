@@ -333,10 +333,10 @@ void autonomous(void) {
   pid_turn_by(90); //67
 
   
-  pid_drive(-29, 1000, 0, 50);
+  pid_drive(-18, 1000, 0, 50);
   pid_turn_by(87);
   wing2_move();
-  pid_drive(-21, 800);
+  pid_drive(-21, 1200);
   
   
   
