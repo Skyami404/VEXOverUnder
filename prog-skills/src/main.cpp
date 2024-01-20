@@ -286,7 +286,7 @@ void autonomous(void) {
 
   pid_turn_by(-25, 1000); //-12
   //wait(5, sec);
-  pid_drive(-25, 2000); //-25
+  pid_drive(-25, 1500); //-25
   printf("what is this\n");
   // wing2_move();
   pid_turn_by(-67, 500); // position to push on right side //-60
@@ -358,7 +358,7 @@ void autonomous(void) {
   pid_drive(7, 500, 0, 20);
   pid_drive(-10, 500, 0, 20);
   double_wing(); //close both wings
-  pid_drive(5, 500, 0, 20);
+  pid_drive(5, 500, 0, 20); 
 
   return;
 }
