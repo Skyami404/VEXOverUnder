@@ -331,7 +331,7 @@ void autonomous(void) {
   double_wing(); //close both wings 
 
   pid_turn_by(-90, 1200); //-85 // push triballs //-80
-  pid_drive(-12.5, 3000, 0, 10); //-10 //FIX THIS
+  pid_drive(-12.5, 2000, 0, 10); //-10 //FIX THIS
   //wing2_move(); //open wings
   double_wing();
   pid_turn_by(90, 1200); //97
@@ -353,11 +353,11 @@ void autonomous(void) {
   pid_turn_by(87);
   pid_drive(-8, 500, 0, 20);
   pid_turn_by(45, 500);
-  double_wing(); //open both wings
+  wing1_move(); //open both wings
   pid_drive(-17, 1000, 0, 20);
   pid_drive(7, 500, 0, 20);
   pid_drive(-10, 500, 0, 20);
-  double_wing(); //close both wings
+  wing2_move(); //close both wings
   pid_drive(5, 500, 0, 20); 
 
   return;
