@@ -295,10 +295,12 @@ void autonomous(void) {
   printf("is this working\n");
   //Drivetrain.turnFor(-45, deg, 100);
   pid_drive(14, 1000, 0, 20);
-  pid_turn_by(135);
-  pid_drive(-17, 2000, 0, 20);
-  wait(1, sec);
+  pid_turn_by(123);
+  pid_drive(-7, 2000, 0, 20);
   wing2_move();
+  wait(0.5, sec);
+  pid_drive(-14, 2000, 0, 12);
+  //wing2_move();
   pid_turn_by(20);
   wait(1, sec);
 
