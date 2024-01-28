@@ -263,10 +263,10 @@ void block_move(void) {
 
 void autonomous(void) {
   pid_drive(8, 500); 
-  pid_turn_by(-29, 1000); //-29
+  pid_turn_by(-31, 1000); //-29
   pid_drive(2, 500); //7
   cata.spin(forward, 12, volt); // shoot triballs
-  wait(30, sec); //30 
+  wait(2, sec); //30 
   cata.stop();
   //cata_load();
   printf("another one of me");
@@ -314,8 +314,8 @@ void autonomous(void) {
 
   pid_turn_by(82, 500);
   //wing2_move();
-  pid_drive(-8, 1000, 0, 20); //  FIX THIS
-  pid_turn_by(90, 500); //82
+  pid_drive(-10, 1000, 0, 20); //  -8
+  pid_turn_by(85, 500); //90
 
   //wing2_move();
   double_wing(); //open both wings
