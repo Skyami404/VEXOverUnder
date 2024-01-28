@@ -263,10 +263,10 @@ void block_move(void) {
 
 void autonomous(void) {
   pid_drive(8, 500); 
-  pid_turn_by(-31, 1000); //-29
+  pid_turn_by(-29, 1000); //-29
   pid_drive(2, 500); //7
   cata.spin(forward, 12, volt); // shoot triballs
-  wait(2, sec); //30 
+  wait(30, sec); //30 
   cata.stop();
   //cata_load();
   printf("another one of me");
@@ -279,17 +279,17 @@ void autonomous(void) {
 
   pid_drive(-30, 3000, 0, 25); // cross under elevation bar //-35 
 
-  pid_turn_by(-18); //-2
+  //pid_turn_by(-3); //-2
   //wait(5, sec);
-  pid_drive(-20, 3000, 0, 25); //-10
+  pid_drive(-22, 3000, 0, 25); //-10
   printf("yoloyolo\n");
 
-  pid_turn_by(-25, 1000); //-12
+  pid_turn_by(-20, 1000); //-12
   //wait(5, sec);
-  pid_drive(-25, 1500); //-25
+  pid_drive(-24, 1500); //-25
   printf("what is this\n");
   // wing2_move();
-  pid_turn_by(-67, 500); // position to push on right side //-60
+  pid_turn_by(-65, 500); // position to push on right side //-60
 
   printf("the secret recipe");
 
@@ -303,14 +303,14 @@ void autonomous(void) {
 
   pid_drive(-12, 800, 0, 100); //-10
   pid_drive(8, 1000, 0, 30); //4
-  pid_drive(-12, 800, 0, 100); //-10
-  pid_drive(8, 1000, 0, 30); //4
+  // pid_drive(-12, 800, 0, 100); //-10
+  // pid_drive(8, 1000, 0, 30); //4
   // pid_drive(-12, 800, 0, 100); //-10
   // pid_drive(8, 1000, 0, 39); //4
   wing2_move();
   //double_wing(); //close both wings
-  pid_turn_by(-60, 1000); // position to go to middle to push triballs //-73
-  pid_drive(-28, 1500, 0, 30); //-27
+  pid_turn_by(-55, 1000); // position to go to middle to push triballs //-73
+  pid_drive(-27, 1500, 0, 30); //-27
 
   pid_turn_by(82, 500);
   //wing2_move();
@@ -321,17 +321,17 @@ void autonomous(void) {
   double_wing(); //open both wings
   pid_drive(-17, 800, 0, 60); //-15 // push triballs
   pid_drive(8, 1000, 0, 60);
-  pid_turn_by(15);
+  pid_turn_by(-5);
   pid_drive(-12, 800, 0, 60);
   pid_drive(6, 1000, 0, 60);
-  pid_turn_by(10);
   pid_drive(-12, 800, 0, 60);
   //wing2_move(); //close both wings
-  pid_drive(17, 1000, 0, 30); //14
-  double_wing(); //close both wings 
+  double_wing();
+  pid_turn_by(-20);
+  pid_drive(15, 1000, 0, 30); //14
 
-  pid_turn_by(-90, 1200); //-85 // push triballs //-80
-  pid_drive(-12.5, 2000, 0, 10); //-10 //FIX THIS
+  pid_turn_by(-70, 1200); //-85 // push triballs //-80
+  pid_drive(-10.5, 2000, 0, 10); //-10 //FIX THIS
   //wing2_move(); //open wings
   double_wing();
   pid_turn_by(90, 1200); //97
@@ -349,7 +349,7 @@ void autonomous(void) {
   double_wing();
 
   pid_turn_by(-60); //-47
-  pid_drive(-33, 1500, 0, 20);
+  pid_drive(-35, 1500, 0, 12);
   pid_turn_by(87);
   pid_drive(-8, 500, 0, 20);
   pid_turn_by(45, 500);
