@@ -33,7 +33,6 @@
 			"cStandard": "gnu99",
 			"cppStandard": "gnu++11",
 			"intelliSenseMode": "macos-clang-x86"
-			//"configurationProvider": "ms-vscode.makefile-tools"
 		},
 		{
 			"name": "Linux",
