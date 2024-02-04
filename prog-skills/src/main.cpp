@@ -255,7 +255,7 @@ void block_move(void) {
 //   arm.spinFor(forward, 135, degrees);
 // }
 
-// void move_arm_up(void) {
+// void mo//////////////////////////////////////ve_arm_up(void) {
 //   arm.setVelocity(100, percent);
 //   arm.setTimeout(3, sec);
 //   arm.spinFor(reverse, 135, degrees);
@@ -266,7 +266,7 @@ void autonomous(void) {
   pid_turn_by(-29, 1000); //-29
   pid_drive(2, 500); //7
   cata.spin(forward, 12, volt); // shoot triballs
-  wait(2, sec); //30 
+  wait(30, sec); //30 
   cata.stop();
   //cata_load();
   printf("another one of me");
@@ -289,7 +289,7 @@ void autonomous(void) {
   pid_drive(-24, 1500); //-25
   printf("what is this\n");
   // wing2_move();
-  pid_turn_by(-63, 500); // position to push on right side //-60
+  pid_turn_by(-66, 500); // position to push on right side //-60
 
   printf("the secret recipe");
 
@@ -302,14 +302,14 @@ void autonomous(void) {
   wing2_move(); //open wing
 
   pid_drive(-12, 800, 0, 100); //-10
+  pid_drive(8, 1000, 0, 30); //4
+  pid_drive(-12, 800, 0, 100); //-10
   pid_drive(6, 1000, 0, 30); //4
-  // pid_drive(-12, 800, 0, 100); //-10
-  // pid_drive(8, 1000, 0, 30); //4
   // pid_drive(-12, 800, 0, 100); //-10
   // pid_drive(8, 1000, 0, 39); //4
   wing2_move();
   //double_wing(); //close both wings
-  pid_turn_by(-63, 1000); // position to go to middle to push triballs //-60
+  pid_turn_by(-68, 1000); // position to go to middle to push triballs //-66
   pid_drive(-27, 1500, 0, 30); //-27
 
   pid_turn_by(82, 500);
@@ -323,10 +323,11 @@ void autonomous(void) {
   pid_drive(8, 1000, 0, 60);
   pid_turn_by(-5);
   pid_drive(-12, 800, 0, 60);
+  double_wing(); //closes now here
   pid_drive(6, 1000, 0, 60);
   //pid_drive(-12, 800, 0, 60); //third push
   //wing2_move(); //close both wings
-  double_wing();
+  // double_wing(); moved it up
   pid_turn_by(-20);
   pid_drive(15, 1000, 0, 30); //14
 
