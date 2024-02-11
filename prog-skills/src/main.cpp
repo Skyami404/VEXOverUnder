@@ -263,7 +263,7 @@ void block_move(void) {
 
 void autonomous(void) {
   pid_drive(8, 500); 
-  pid_turn_by(-29, 1000); //-29
+  pid_turn_by(-30, 1000); //-29
   pid_drive(2, 500); //7
   cata.spin(forward, 12, volt); // shoot triballs
   wait(2, sec); //30 
@@ -273,7 +273,7 @@ void autonomous(void) {
   pid_drive(-2);
 
   //cata.spinFor(forward, 180, degrees);
-  pid_turn_by(43, 5000); //43
+  pid_turn_by(44, 5000); //43
   // cata_load();
   printf("joe");
 
