@@ -263,7 +263,11 @@ void block_move(void) {
 
 void autonomous(void) {
   pid_drive(8, 500); 
+<<<<<<< Updated upstream
   pid_turn_by(-27, 1000); //-29
+=======
+  pid_turn_by(-28, 1000); //-29
+>>>>>>> Stashed changes
   pid_drive(2, 500); //7
   cata.spin(forward, 12, volt); // shoot triballs
   wait(2, sec); //30 
@@ -310,8 +314,16 @@ void autonomous(void) {
   // pid_drive(-12, 800, 0, 100); //-10
   // pid_drive(8, 1000, 0, 39); //4
   wing2_move();
+<<<<<<< Updated upstream
   //double_wing(); //close both wings
   pid_turn_by(-60, 1000); // -68 // position to go to middle to push triballs //-60
+=======
+  
+  pid_turn_by(-68, 1000); // position to go to middle to push triballs //-66
+  pid_drive(-27, 1500, 0, 30); //-27
+
+  pid_turn_by(72, 500); //82
+>>>>>>> Stashed changes
   //wing2_move();
   pid_drive(-24, 1500, 0, 30); //-27
   pid_turn_by(130, 1000);
@@ -320,14 +332,19 @@ void autonomous(void) {
   // pid_turn_by(85, 500); //90
 
   //wing2_move();
-  double_wing(); //open both wings
+  wing1_move(); //open right wings
   pid_drive(-17, 800, 0, 60); //-15 // push triballs
   pid_drive(8, 1000, 0, 60);
   pid_turn_by(-5);
   pid_drive(-12, 800, 0, 60);
+<<<<<<< Updated upstream
   double_wing(); //closes now here
   wait(0.2, sec);
   pid_drive(12, 1000, 0, 60);
+=======
+  wing2_move(); //closes right here
+  pid_drive(6, 1000, 0, 60); 
+>>>>>>> Stashed changes
   //pid_drive(-12, 800, 0, 60); //third push
   //wing2_move(); //close both wings
   // double_wing(); moved it up
