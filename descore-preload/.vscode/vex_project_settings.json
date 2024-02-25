@@ -1,10 +1,10 @@
 {
 	"project": {
-		"name": "goalside1",
-		"slot": 2,
+		"name": "descore-preload",
+		"slot": 4,
 		"description": "Empty V5 C++ Project",
 		"platform": "V5",
-		"creationDate": "Sun, 01 Oct 2023 00:09:08 GMT",
+		"creationDate": "Sun, 25 Feb 2024 00:53:01 GMT",
 		"language": "cpp",
 		"sdkVersion": "V5_20220726_10_00_00",
 		"cpp": {

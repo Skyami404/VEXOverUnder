@@ -11,20 +11,16 @@ extern motor_group LeftDriveSmart;
 extern motor_group RightDriveSmart;
 extern motor cata;
 extern motor intake;
-extern motor arm;
-extern motor climb_m;
 
 extern inertial Inertia;
-extern rotation Rotation;
 
 extern digital_out wing1;
 extern digital_out wing2;
-extern digital_out blocker;
+extern digital_out climb;
 
 extern timer PidDriveTimer;
 extern timer Debounce;
 extern timer PidTurnTimer;
-
 
 /** 
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
