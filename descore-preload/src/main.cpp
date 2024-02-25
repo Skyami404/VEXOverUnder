@@ -113,35 +113,35 @@ void cata_adjust(void) {
   cata.spinFor(10, degrees, true);
 }
 
-void cata_down30(void) { // DON'T USE THIS
-  double rot_deg = Rotation.position(degrees);
-  cata.setVelocity(100, percent);
-  cata.spinFor(10, degrees, true);
-  printf("rot_deg %f", rot_deg);
+// void cata_down30(void) { // DON'T USE THIS
+//   double rot_deg = Rotation.position(degrees);
+//   cata.setVelocity(100, percent);
+//   cata.spinFor(10, degrees, true);
+//   printf("rot_deg %f", rot_deg);
 
-}
+// }
 
-void cata_stop(void) {
-  cat = false;
-}
+// void cata_stop(void) {
+//   cat = false;
+// }
 
-void cata_rot(double deg) { // DON'T USE THIS
+// void cata_rot(double deg) { // DON'T USE THIS
 
-  while (true) {
-    if (deg > Rotation.position(degrees)) {
-      cata.spin(forward, 5, volt); // direction may be wrong
-    }
-    else {
-      cata.stop();
-      break;
-    }
-  }
-}
+//   while (true) {
+//     if (deg > Rotation.position(degrees)) {
+//       cata.spin(forward, 5, volt); // direction may be wrong
+//     }
+//     else {
+//       cata.stop();
+//       break;
+//     }
+//   }
+// }
 
 
-void cata_button() { // DON'T USE THIS
-  cata_rot(175); // change degrees depending on how far you need it to go
-}
+// void cata_button() { // DON'T USE THIS
+//   cata_rot(175); // change degrees depending on how far you need it to go
+// }
 
 // Intake Functions
 bool int_spin = false;
@@ -238,19 +238,36 @@ void double_wing(void) {
 }
 
 // blocker
-bool block = false;
-void block_move(void) {
+// bool block = false;
+// void block_move(void) {
+//   if (Debounce.value() < 0.1) {
+//       return;
+//     }
+//   Debounce.reset();
+//   if (block == false) {
+//     blocker.set(true);
+//     block = true;
+//   }
+//   else {
+//     blocker.set(false);
+//     block = false;
+//   }
+// }
+
+// climber
+bool c = false;
+void climb_move(void) {
   if (Debounce.value() < 0.1) {
       return;
     }
   Debounce.reset();
-  if (block == false) {
-    blocker.set(true);
-    block = true;
+  if (c == false) {
+    climb.set(true);
+    c = true;
   }
   else {
-    blocker.set(false);
-    block = false;
+    climb.set(false);
+    c = false;
   }
 }
 
@@ -533,11 +550,13 @@ void usercontrol(void) {
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
-  Controller.ButtonA.pressed(wing1_move);
 
+  Controller.ButtonA.pressed(wing1_move);
   Controller.ButtonY.pressed(wing2_move);
   Controller.ButtonX.pressed(double_wing);
-  Controller.ButtonUp.pressed(block_move);
+  
+  Controller.ButtonUp.pressed(climb_move);
+  // Controller.ButtonUp.pressed(block_move);
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.

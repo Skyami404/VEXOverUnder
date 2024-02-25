@@ -82,10 +82,10 @@ void tdriverev(double rotation, double power, int32_t time) {
 // **** CATAPULT TESTING ****
 bool cat = false;
 void cata_loop(void) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
       return;
     }
-  DebounceTimer.reset();
+  Debounce.reset();
   if (cat == false) {
     cata.spin(forward, 20, volt);
     cat = true;
@@ -97,7 +97,7 @@ void cata_loop(void) {
   }
 
 void cata_load(void) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
     return;
   }
   cata.setVelocity(100, percent);
@@ -105,7 +105,7 @@ void cata_load(void) {
 }
 
 void cata_shoot(void) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
     return;
   }
   cata.setVelocity(100, percent);
@@ -113,27 +113,27 @@ void cata_shoot(void) {
 }
 
 void cata_adjust(void) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
     return;
   }
   cata.setVelocity(100, percent);
   cata.spinFor(10, degrees, true);
 }
 
-void cata_down30(void) { // DON'T USE THIS
-  double rot_deg = Rotation.position(degrees);
-  cata.setVelocity(100, percent);
-  cata.spinFor(10, degrees, true);
-  printf("rot_deg %f", rot_deg);
+// void cata_down30(void) { // DON'T USE THIS
+//   double rot_deg = Rotation.position(degrees);
+//   cata.setVelocity(100, percent);
+//   cata.spinFor(10, degrees, true);
+//   printf("rot_deg %f", rot_deg);
 
-}
+// }
 
-void cata_stop(void) {
-  cat = false;
-}
+// void cata_stop(void) {
+//   cat = false;
+// }
 
 // void cata_rot(double deg) { // DON'T USE THIS
-//   if (DebounceTimer.value() < 0.1) {
+//   if (Debounce.value() < 0.1) {
 //     return;
 //   }
 //   while (true) {
@@ -183,10 +183,10 @@ void intake_stop(void) {
 // wings
 bool w1 = false;
 void wing1_move(void) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
       return;
     }
-  DebounceTimer.reset();
+  Debounce.reset();
   if (w1 == false) {
     wing1.set(true);
     w1 = true;
@@ -199,10 +199,10 @@ void wing1_move(void) {
 
 bool w2 = false;
 void wing2_move(void) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
       return;
     }
-  DebounceTimer.reset();
+  Debounce.reset();
   if (w2 == false) {
     wing2.set(true);
     w2 = true;
@@ -214,10 +214,10 @@ void wing2_move(void) {
 }
 
 void double_wing(void) {
-  if (DebounceTimer.value() < 0.1) {
+  if (Debounce.value() < 0.1) {
       return;
     }
-  DebounceTimer.reset();
+  Debounce.reset();
   if (w1 == false && w2 == false) {
     wing1.set(true);
     w1 = true;
@@ -233,19 +233,36 @@ void double_wing(void) {
   }
 }
 //blocker
-bool block = false;
-void block_move(void) {
-  if (DebounceTimer.value() < 0.1) {
+// bool block = false;
+// void block_move(void) {
+//   if (Debounce.value() < 0.1) {
+//       return;
+//     }
+//   Debounce.reset();
+//   if (block == false) {
+//     blocker.set(true);
+//     block = true;
+//   }
+//   else {
+//     blocker.set(false);
+//     block = false;
+//   }
+// }
+
+// climb
+bool c = false;
+void climb_move(void) {
+  if (Debounce.value() < 0.1) {
       return;
     }
-  DebounceTimer.reset();
-  if (block == false) {
-    blocker.set(true);
-    block = true;
+  Debounce.reset();
+  if (c == false) {
+    climb.set(true);
+    c = true;
   }
   else {
-    blocker.set(false);
-    block = false;
+    climb.set(false);
+    c = false;
   }
 }
 
@@ -263,11 +280,7 @@ void block_move(void) {
 
 void autonomous(void) {
   pid_drive(8, 500); 
-<<<<<<< Updated upstream
   pid_turn_by(-27, 1000); //-29
-=======
-  pid_turn_by(-28, 1000); //-29
->>>>>>> Stashed changes
   pid_drive(2, 500); //7
   cata.spin(forward, 12, volt); // shoot triballs
   wait(2, sec); //30 
@@ -314,16 +327,11 @@ void autonomous(void) {
   // pid_drive(-12, 800, 0, 100); //-10
   // pid_drive(8, 1000, 0, 39); //4
   wing2_move();
-<<<<<<< Updated upstream
-  //double_wing(); //close both wings
-  pid_turn_by(-60, 1000); // -68 // position to go to middle to push triballs //-60
-=======
   
   pid_turn_by(-68, 1000); // position to go to middle to push triballs //-66
   pid_drive(-27, 1500, 0, 30); //-27
 
   pid_turn_by(72, 500); //82
->>>>>>> Stashed changes
   //wing2_move();
   pid_drive(-24, 1500, 0, 30); //-27
   pid_turn_by(130, 1000);
@@ -337,14 +345,8 @@ void autonomous(void) {
   pid_drive(8, 1000, 0, 60);
   pid_turn_by(-5);
   pid_drive(-12, 800, 0, 60);
-<<<<<<< Updated upstream
-  double_wing(); //closes now here
-  wait(0.2, sec);
-  pid_drive(12, 1000, 0, 60);
-=======
   wing2_move(); //closes right here
   pid_drive(6, 1000, 0, 60); 
->>>>>>> Stashed changes
   //pid_drive(-12, 800, 0, 60); //third push
   //wing2_move(); //close both wings
   // double_wing(); moved it up
@@ -605,10 +607,15 @@ void usercontrol(void) {
   Controller.ButtonR2.pressed(cata_shoot);
   Controller.ButtonL1.pressed(intake_spin2);
   Controller.ButtonL2.pressed(intake_spin);
-  Controller.ButtonA.pressed(cata_loop);
-  Controller.ButtonB.pressed(cata_stop);
+  Controller.ButtonB.pressed(cata_loop);
   Controller.ButtonRight.pressed(cata_adjust);
-  Controller.ButtonUp.pressed(block_move);
+  // Controller.ButtonDown.pressed(move_arm_down);
+  // Controller.ButtonUp.pressed(move_arm_up);
+  Controller.ButtonA.pressed(wing1_move);
+
+  Controller.ButtonY.pressed(wing2_move);
+  Controller.ButtonX.pressed(double_wing);
+  Controller.ButtonUp.pressed(climb_move);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
 
