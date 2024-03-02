@@ -29,7 +29,7 @@ int wheelTravel = 4 * M_PI;
 
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, wheelTravel, 13.5, 18, inches, 1);
 
-inertial Inertia = inertial(PORT7); 
+inertial Inertia = inertial(PORT6); 
 //rotation Rotation = rotation(PORT5, false); 
 
 digital_out wing1 = digital_out(Brain.ThreeWirePort.D);
