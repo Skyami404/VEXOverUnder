@@ -557,7 +557,7 @@ void usercontrol(void) {
     double forwardVal = Controller.Axis1.position(percent);
 
     double turnVolts = turnVal * -0.12;
-    double forwardVolts = forwardVal * 0.12* (1 - (abs(turnVolts)/12.0) * turnImportance);
+    double forwardVolts = forwardVal * 0.12 * (1 - (abs(turnVolts)/12.0) * turnImportance);
     if (turnVolts > 12) {
       turnVolts = 12;
     }

@@ -12,18 +12,18 @@ controller Controller;
 
 // ADJUST THE PORTS, DONT TOUCH ANYTHING ELSE
 
-motor L1 = motor(PORT13, ratio6_1, true); 
-motor L2 = motor(PORT1, ratio6_1, true);
-motor L3 = motor(PORT12, ratio6_1, true);
+motor L1 = motor(PORT15, ratio6_1, true); 
+motor L2 = motor(PORT9, ratio6_1, true);
+motor L3 = motor(PORT1, ratio6_1, true);
 motor_group LeftDriveSmart = motor_group(L1, L2, L3);
 
-motor R1 = motor(PORT9, ratio6_1, false); 
-motor R2 = motor(PORT6, ratio6_1, false);
-motor R3 = motor(PORT19, ratio6_1, false);
+motor R1 = motor(PORT2, ratio6_1, false); 
+motor R2 = motor(PORT10, ratio6_1, false);
+motor R3 = motor(PORT3, ratio6_1, false);
 motor_group RightDriveSmart = motor_group(R1, R2, R3);
 
-motor cata = motor(PORT11, ratio36_1, true);
-motor intake = motor(PORT10, ratio18_1, false);
+motor cata = motor(PORT5, ratio36_1, true);
+motor intake = motor(PORT8, ratio18_1, false);
 
 int wheelTravel = 4 * M_PI;
 
@@ -32,11 +32,10 @@ drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, wheelTravel,
 inertial Inertia = inertial(PORT7); 
 //rotation Rotation = rotation(PORT5, false); 
 
-digital_out wing1 = digital_out(Brain.ThreeWirePort.G); 
-digital_out wing2 = digital_out(Brain.ThreeWirePort.F);
+digital_out wing1 = digital_out(Brain.ThreeWirePort.D);
+digital_out wing2 = digital_out(Brain.ThreeWirePort.E);
 
-digital_out climb = digital_out(Brain.ThreeWirePort.H);
-
+digital_out climb = digital_out(Brain.ThreeWirePort.C);
 
 timer PidDriveTimer = timer();
 timer Debounce = timer();
