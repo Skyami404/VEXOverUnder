@@ -303,6 +303,8 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
+  pid_turn_by(90);
+  return;
   intake.setVelocity(100, percent);
   intake.spin(forward);
   pid_drive(3); // pick up first triball
@@ -314,7 +316,7 @@ void autonomous(void) {
   wing2_move();
   pid_turn_by(-45);
   pid_drive(-12, 800, 0, 40);
-  pid_drive(6, 500, 0, 20);
+  pid_drive(6, 500, 0, 40);
   pid_turn_by(180);
   intake.spin(reverse); // score 3 triballs
   pid_drive(-8, 800, 0, 40);
@@ -323,9 +325,9 @@ void autonomous(void) {
   intake.spin(forward);
   pid_drive(22, 1000, 0, 40); // pick up 4th triball
   pid_turn_by(90);
-  pid_drive(8, 500, 0, 30);
+  pid_drive(8, 500, 0, 40);
   intake.spin(reverse);
-  pid_drive(-5, 500, 0, 30);
+  pid_drive(-5, 500, 0, 40);
   intake.spin(forward);
   pid_turn_by(-45); 
   pid_drive(10, 800, 0, 40); // pick up 5th triball
