@@ -87,7 +87,7 @@ void cata_loop(void) {
     }
   Debounce.reset();
   if (cat == false) {
-    cata.spin(forward, 20, volt);
+    cata.spin(forward, 10, volt);
     cat = true;
   }
   else if (cat == true){
@@ -279,73 +279,77 @@ void climb_move(void) {
 // }
 
 void autonomous(void) {
-  pid_drive(8, 500); 
-  pid_turn_by(-27, 1000); //-29
-  pid_drive(2, 500); //7
-  cata.spin(forward, 12, volt); // shoot triballs
-  wait(2, sec); //30 
-  cata.stop();
-  //cata_load();
-  printf("another one of me");
-  pid_drive(-2);
+  pid_turn_by(-45);
+  pid_drive(-10, 800, 0, 30);
+  wait(0.1, sec);
+  pid_drive(-30, 1800, 0, 60);
+  //pid_drive(-20, 1500, 0, 100);
+  pid_turn_by(50);
+  pid_drive(-30, 2000, 0, 60);
+  pid_drive(22, 1500, 0, 20);
+  pid_turn_by(73);
+  pid_drive(10, 800, 0, 20);
+  // cata.spin(forward, 10, volt);
+  // wait(2, sec);
+  // cata.stop();
 
   //cata.spinFor(forward, 180, degrees);
-  pid_turn_by(43, 5000); //43
+  pid_drive(5, 800, 0, 20);
+  pid_turn_by(62, 5000); //43
   // cata_load();
   printf("joe");
 
-  pid_drive(-25, 1500, 0, 25); // cross under elevation bar //-35 
-  pid_turn_by(-18); //-15
+  pid_drive(-23, 1500, 0, 25); // cross under elevation bar //-35 
+  pid_turn_by(-22); //-15
   pid_drive(-5, 1500, 0, 25); // cross under elevation bar //-35 
   //pid_turn_by(-3); //-2
   //wait(5, sec);
-  pid_drive(-22, 3000, 0, 25); //-10
+  pid_drive(-125, 5000, 0, 60); //-10
   printf("yoloyolo\n");
 
-  pid_turn_by(-28, 800); //-12
+  pid_turn_by(-25, 1200); //-12
   //wait(5, sec);
-  pid_drive(-26, 1500); //-24
+  pid_drive(-63, 2000, 0, 60); //-24
   printf("what is this\n");
   // wing2_move();
-  pid_turn_by(-63, 500); // position to push on right side //-66
+  pid_turn_by(-65, 1000); // position to push on right side //-66
 
   printf("the secret recipe");
 
-  pid_drive(-11, 1000, 0, 100); // push triballs //-7
+  pid_drive(-14, 1000, 0, 100); // push triballs //-7
   pid_drive(6, 1000, 0, 20); //4
   //pid_turn_by(-18);
   printf("is this working");
 
   //double_wing(); //open both wings
-  wing2_move(); //open wing
+  wing1_move(); //open wing
   wait(0.2, sec);
   pid_turn_by(5);
-  pid_drive(-12, 800, 0, 100); //-10
-  pid_drive(6, 1000, 0, 30); //4
-  pid_drive(-12, 800, 0, 100); //-10
+  pid_drive(-14, 800, 0, 100); //-10
   pid_drive(6, 1000, 0, 30); //4
   // pid_drive(-12, 800, 0, 100); //-10
+  // pid_drive(6, 1000, 0, 30); //4
+  // pid_drive(-12, 800, 0, 100); //-10
   // pid_drive(8, 1000, 0, 39); //4
-  wing2_move();
+  wing1_move();
   
-  pid_turn_by(-68, 1000); // position to go to middle to push triballs //-66
-  pid_drive(-27, 1500, 0, 30); //-27
+  pid_turn_by(-73, 1000); // position to go to middle to push triballs //-66
+  pid_drive(-50, 2000, 0, 60); //-27
 
-  pid_turn_by(72, 500); //82
+  pid_turn_by(125, 500); //82
   //wing2_move();
-  pid_drive(-24, 1500, 0, 30); //-27
-  pid_turn_by(130, 1000);
+  pid_turn_by(110, 1000);
 
   //pid_drive(-10, 1000, 0, 20); //  -8
   // pid_turn_by(85, 500); //90
 
   //wing2_move();
-  wing1_move(); //open right wings
-  pid_drive(-17, 800, 0, 60); //-15 // push triballs
+  double_wing(); //open right wings
+  pid_drive(-25, 800, 0, 60); //-15 // push triballs
   pid_drive(8, 1000, 0, 60);
   pid_turn_by(-5);
   pid_drive(-12, 800, 0, 60);
-  wing2_move(); //closes right here
+  double_wing(); //closes right here
   pid_drive(6, 1000, 0, 60); 
   //pid_drive(-12, 800, 0, 60); //third push
   //wing2_move(); //close both wings
@@ -353,7 +357,7 @@ void autonomous(void) {
   pid_turn_by(-80, 1200); //-73 //changed rn
   pid_drive(-24.5, 2000, 0, 10); //-10 //FIX THIS
   //wing2_move(); //open wings
-  pid_turn_by(115, 1200); //97
+  pid_turn_by(90, 1200); //97
   double_wing();
   wait(0.2, sec);
   //wing1_move();
@@ -457,10 +461,10 @@ void inertial_test(void) {
   double inert = Inertia.rotation();
   printf("%2f\n", inert);
 }
-double turn_kp = 0.1; //1.5
+double turn_kp = 0.5; //1.5
 double turn_ki = 0.00000001; //0.0009
 double turn_kd = 0;
-double turn_tolerance = 10.5;    // we want to stop when we reach the desired angle +/- 1 degree
+double turn_tolerance = 5;    // we want to stop when we reach the desired angle +/- 1 degree
 
 long pid_turn(double angle, int32_t time) {
   double delay = 20;   // Inertia can output reading at a rate of 50 hz (20 msec)
@@ -586,7 +590,7 @@ void usercontrol(void) {
     double turnVal = Controller.Axis3.position(percent);
     double forwardVal = Controller.Axis1.position(percent);
 
-    double turnVolts = turnVal * -0.12 * (7/5);
+    double turnVolts = turnVal * -0.2;
     double forwardVolts = forwardVal * 0.12 * (7/5) * (1 - (abs(turnVolts)/12.0) * turnImportance);
     if (turnVolts > 12) {
       turnVolts = 12;

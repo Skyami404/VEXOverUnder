@@ -79,7 +79,7 @@ void cata_loop(void) {
     }
   Debounce.reset();
   if (cat == false) {
-    cata.spin(forward, 20, volt);
+    cata.spin(forward, 11, volt);
     cat = true;
   }
   else if (cat == true){
@@ -145,6 +145,7 @@ void cata_adjust(void) {
 
 // Intake Functions
 bool int_spin = false;
+bool int_spin2 = false;
 void intake_spin(void) {
   if (Debounce.value() < 0.1) {
     return;
@@ -153,6 +154,7 @@ void intake_spin(void) {
   if (int_spin == false) {
     intake.spin(forward, 100, percent);
     int_spin = true;
+    int_spin2 = false;
     printf("hi \n");
   }
   else{
@@ -162,7 +164,7 @@ void intake_spin(void) {
   }
 }
 
-bool int_spin2 = false;
+
 void intake_spin2(void) {
   if (Debounce.value() < 0.1) {
     return;
@@ -171,6 +173,7 @@ void intake_spin2(void) {
   if (int_spin2 == false) {
     intake.spin(reverse, 100, percent);
     int_spin2 = true;
+    int_spin = false;
     printf("hello \n");
   }
   else{
@@ -575,8 +578,8 @@ void usercontrol(void) {
     
   Controller.ButtonR1.pressed(cata_load);
   Controller.ButtonR2.pressed(cata_shoot);
-  Controller.ButtonL1.pressed(intake_spin2);
-  Controller.ButtonL2.pressed(intake_spin);
+  Controller.ButtonL1.pressed(intake_spin);
+  Controller.ButtonL2.pressed(intake_spin2);
   Controller.ButtonB.pressed(cata_loop);
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
