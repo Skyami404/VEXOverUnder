@@ -5,7 +5,7 @@ using signature = vision::signature;
 using code = vision::code;
 
 // A global instance of brain used for printing to the V5 Brain screen
-brain  Brain;
+brain Brain;
 
 // VEXcode device constructors
 controller Controller;
@@ -13,7 +13,7 @@ controller Controller;
 // ADJUST THE PORTS, DONT TOUCH ANYTHING ELSE
 
 motor L1 = motor(PORT15, ratio6_1, true); 
-motor L2 = motor(PORT9, ratio6_1, true);
+motor L2 = motor(PORT14, ratio6_1, true);
 motor L3 = motor(PORT1, ratio6_1, true);
 motor_group LeftDriveSmart = motor_group(L1, L2, L3);
 
@@ -23,7 +23,7 @@ motor R3 = motor(PORT3, ratio6_1, false);
 motor_group RightDriveSmart = motor_group(R1, R2, R3);
 
 motor cata = motor(PORT5, ratio36_1, true);
-motor intake = motor(PORT8, ratio18_1, false);
+motor intake = motor(PORT9, ratio18_1, false);
 
 int wheelTravel = 4 * M_PI;
 

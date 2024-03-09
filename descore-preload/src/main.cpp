@@ -306,21 +306,21 @@ void driveForward(double rotation, double power, int32_t time) {
 void autonomous(void) {
   intake.setVelocity(50, percent);
   Drivetrain.setStopping(hold);
-  wing2_move();
+  wing1_move();
   //wait(1, sec);
-  pid_drive(-10, 1000, 0, 20);
+  pid_drive(-20, 1000, 0, 20);
   //pid_turn_by(45);
   wait(1, sec);
-  wing2_move();
+  wing1_move();
   wait(0.2, sec);
-  pid_turn_by(55);
-  pid_drive(-15, 1500, 0, 30);
+  pid_turn_by(60);
+  pid_drive(-30, 1500, 0, 100);
   pid_drive(3);
-  pid_turn_by(-45);
-  pid_drive(15);
-  pid_turn_by(119);
-  wing2_move();
-  pid_drive(-24, 3000, 0, 10);
+  pid_turn_by(-40);
+  pid_drive(32, 2000, 0, 50);
+  pid_turn_by(125);
+  wing1_move();
+  pid_drive(-35, 3000, 0, 10);
   
   
   
@@ -403,7 +403,7 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
 double turn_kp = 0.5; //1.5
 double turn_ki = 0.00000001; //0.0009
 double turn_kd = 0;
-double turn_tolerance = 17.5;    // we want to stop when we reach the desired angle +/- 1 degree
+double turn_tolerance = 5;    // we want to stop when we reach the desired angle +/- 1 degree
 
 long pid_turn(double angle) {
   double delay = 20;   // Inertia can output reading at a rate of 50 hz (20 msec)
@@ -541,20 +541,18 @@ void usercontrol(void) {
       RightDriveSmart.spin(reverse, forwardVolts + turnVolts, voltageUnits::volt);
     
     }
-    
   Controller.ButtonR1.pressed(cata_load);
   Controller.ButtonR2.pressed(cata_shoot);
-  Controller.ButtonL1.pressed(intake_spin2);
-  Controller.ButtonL2.pressed(intake_spin);
+  Controller.ButtonL1.pressed(intake_spin);
+  Controller.ButtonL2.pressed(intake_spin2);
   Controller.ButtonB.pressed(cata_loop);
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
-
-  Controller.ButtonA.pressed(wing1_move);
-  Controller.ButtonY.pressed(wing2_move);
+  Controller.ButtonA.pressed(wing2_move);
+  Controller.ButtonY.pressed(wing1_move);
   Controller.ButtonX.pressed(double_wing);
-  
+  // Controller.ButtonUp.pressed(block_move);
   Controller.ButtonUp.pressed(climb_move);
   // Controller.ButtonUp.pressed(block_move);
     // This is the main execution loop for the user control program.

@@ -311,9 +311,9 @@ void autonomous(void) {
   wait(0.2, sec);
   pid_drive(25); // pick up first triball
   pid_drive(-58, 1800, 0, 100);
-  pid_turn_by(-40);
+  pid_turn_by(-31);
   //wing2_move(); // descore match load zone
-  pid_drive(-45, 1000, 0, 100);
+  pid_drive(-50, 1000, 0, 100);
   //wing2_move();
   intake.stop();
   //pid_drive(-20, 1500, 0, 100);
@@ -321,29 +321,30 @@ void autonomous(void) {
   // pid_drive(2, 800, 0, 100);
   // pid_drive(-5, 300, 0, 100);
   // pid_drive(2, 800, 0, 100);
-  pid_turn_by(133);
+  pid_turn_by(135);
   intake.spin(reverse); // score 3 triballs
   pid_drive(12, 800);
   pid_drive(-8, 800, 0, 100);
   pid_turn_by(8);
   pid_drive(20, 1000, 0, 100);
+  pid_drive(8, 800, 0, 100);
+  // pid_drive(20, 1000, 0, 100);
+  // //wing1_move();
+  // pid_drive(-15, 1200, 0, 100);
+  pid_turn_by(-81);
   //wing1_move();
-  pid_drive(-12, 1200, 0, 100);
-  pid_turn_by(-72);
-  //wing1_move();
-  intake.spin(forward);
-  pid_drive(79, 2000, 0, 100); // pick up 4th triball
-  pid_turn_by(140);
-  intake.spin(reverse);
-  wait(0.7, sec);
-  pid_turn_by(-90);
-  pid_drive(20, 1500, 0, 100);
-  pid_turn_by(-90);
+
+  pid_drive(69, 2000, 0, 100); // pick up 4th triball
+  pid_turn_by(-135);
   double_wing();
-  pid_drive(-20, 1500, 0, 100);
-  pid_drive(10, 800, 0, 100);
+  pid_drive(-38);
+  pid_turn_by(100);
+
+  pid_drive(-50, 2500, 0, 100);
+  pid_drive(40, 1000, 0, 100);
   pid_turn_by(90);
-  pid_drive(-20, 2000, 0, 100);
+  pid_drive(-1000, 3000, 0, 100);
+  
 
   return;
   pid_turn_by(180);
@@ -569,8 +570,8 @@ void usercontrol(void) {
     
   Controller.ButtonR1.pressed(cata_load);
   Controller.ButtonR2.pressed(cata_shoot);
-  Controller.ButtonL1.pressed(intake_spin2);
-  Controller.ButtonL2.pressed(intake_spin);
+  Controller.ButtonL1.pressed(intake_spin);
+  Controller.ButtonL2.pressed(intake_spin2);
   Controller.ButtonB.pressed(cata_loop);
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
