@@ -303,39 +303,49 @@ void driveForward(double rotation, double power, int32_t time) {
 }
 
 void autonomous(void) {
-  pid_turn_by(90);
-  return;
   intake.setVelocity(100, percent);
   intake.spin(forward);
-  pid_drive(3); // pick up first triball
-  pid_drive(-24)
-  intake.stop();
-  pid_turn_by(45);
-  wing2_move(); // descore match load zone
+  pid_drive(-10, 1000, 0, 100);
+  pid_drive(10);
   pid_drive(-10);
-  wing2_move();
-  pid_turn_by(-45);
-  pid_drive(-12, 800, 0, 40);
-  pid_drive(6, 500, 0, 40);
-  pid_turn_by(180);
-  intake.spin(reverse); // score 3 triballs
-  pid_drive(-8, 800, 0, 40);
-  pid_drive(6);
-  pid_turn_by(-63);
-  intake.spin(forward);
-  pid_drive(22, 1000, 0, 40); // pick up 4th triball
-  pid_turn_by(90);
-  pid_drive(8, 500, 0, 40);
-  intake.spin(reverse);
-  pid_drive(-5, 500, 0, 40);
-  intake.spin(forward);
-  pid_turn_by(-45); 
-  pid_drive(10, 800, 0, 40); // pick up 5th triball
-  pid_turn_by(-45);
+  wait(0.2, sec);
+  pid_drive(25); // pick up first triball
+  pid_drive(-58, 1800, 0, 100);
+  pid_turn_by(-40);
+  //wing2_move(); // descore match load zone
+  pid_drive(-45, 1000, 0, 100);
+  //wing2_move();
   intake.stop();
+  //pid_drive(-20, 1500, 0, 100);
+  // pid_turn_by(-47);
+  // pid_drive(2, 800, 0, 100);
+  // pid_drive(-5, 300, 0, 100);
+  // pid_drive(2, 800, 0, 100);
+  pid_turn_by(133);
+  intake.spin(reverse); // score 3 triballs
+  pid_drive(12, 800);
+  pid_drive(-8, 800, 0, 100);
+  pid_turn_by(8);
+  pid_drive(20, 1000, 0, 100);
+  //wing1_move();
+  pid_drive(-12, 1200, 0, 100);
+  pid_turn_by(-72);
+  //wing1_move();
+  intake.spin(forward);
+  pid_drive(79, 2000, 0, 100); // pick up 4th triball
+  pid_turn_by(140);
+  intake.spin(reverse);
+  wait(0.7, sec);
+  pid_turn_by(-90);
+  pid_drive(20, 1500, 0, 100);
+  pid_turn_by(-90);
   double_wing();
-  pid_drive(-20, 1000, 0, 60); // score 4th and 5th triballs
-  pid_drive(5);
+  pid_drive(-20, 1500, 0, 100);
+  pid_drive(10, 800, 0, 100);
+  pid_turn_by(90);
+  pid_drive(-20, 2000, 0, 100);
+
+  return;
   pid_turn_by(180);
   intake.spin(reverse); // score 6th triball
   pid_drive(-8, 800, 0, 60);
@@ -415,10 +425,10 @@ long pid_drive(double distance, int32_t time, double space, double drivekp) {
   return loop_count;
 }
 
-double turn_kp = 0.1; //1.5
+double turn_kp = 0.5; //1.5
 double turn_ki = 0.00000001; //0.0009
 double turn_kd = 0;
-double turn_tolerance = 10.5;    // we want to stop when we reach the desired angle +/- 1 degree
+double turn_tolerance = 5;    // we want to stop when we reach the desired angle +/- 1 degree
 
 long pid_turn(double angle) {
   double delay = 20;   // Inertia can output reading at a rate of 50 hz (20 msec)
@@ -565,8 +575,8 @@ void usercontrol(void) {
   Controller.ButtonRight.pressed(cata_adjust);
   // Controller.ButtonDown.pressed(move_arm_down);
   // Controller.ButtonUp.pressed(move_arm_up);
-  Controller.ButtonA.pressed(wing1_move);
-  Controller.ButtonY.pressed(wing2_move);
+  Controller.ButtonA.pressed(wing2_move);
+  Controller.ButtonY.pressed(wing1_move);
   Controller.ButtonX.pressed(double_wing);
   // Controller.ButtonUp.pressed(block_move);
   Controller.ButtonUp.pressed(climb_move);

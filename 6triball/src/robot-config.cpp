@@ -13,7 +13,7 @@ controller Controller;
 // ADJUST THE PORTS, DONT TOUCH ANYTHING ELSE
 
 motor L1 = motor(PORT15, ratio6_1, true); 
-motor L2 = motor(PORT9, ratio6_1, true);
+motor L2 = motor(PORT14, ratio6_1, true);
 motor L3 = motor(PORT1, ratio6_1, true);
 motor_group LeftDriveSmart = motor_group(L1, L2, L3);
 

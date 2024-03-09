@@ -287,32 +287,32 @@ void autonomous(void) {
   pid_turn_by(44);
   pid_drive(-30, 2000, 0, 60);
   pid_drive(20, 1500, 0, 20);
-  pid_turn_by(75);
-  pid_drive(10, 800, 0, 20);
+  pid_turn_by(77);
+  pid_drive(10, 200, 0, 20);
   // cata.spin(forward, 10, volt);
   // wait(2, sec);
   // cata.stop();
 
   //cata.spinFor(forward, 180, degrees);oo
-  pid_drive(5, 800, 0, 20);
+  pid_drive(-5, 800, 0, 20);
   pid_turn_by(52, 5000); //43
   // cata_load();
   printf("joe");
 
-  pid_drive(-21, 1500, 0, 25); // cross under elevation bar //-35 
-  pid_turn_by(-18); //-15
+  pid_drive(-32, 1500, 0, 25); // cross under elevation bar //-35 
+  pid_turn_by(-30); //-15
   pid_drive(-5, 1500, 0, 25); // cross under elevation bar //-35 
   //pid_turn_by(-3); //-2
   //wait(5, sec);
-  pid_drive(-120, 5000, 0, 60); //-10
+  pid_drive(-123, 5000, 0, 60); //-10
   printf("yoloyolo\n");
 
-  pid_turn_by(-20, 800); //-12
+  pid_turn_by(-18, 800); //-12
   //wait(5, sec);
-  pid_drive(-63, 2000, 0, 60); //-24
+  pid_drive(-30, 2000, 0, 60); //-24
   printf("what is this\n");
   // wing2_move();
-  pid_turn_by(-50, 1000); // position to push on right side //-66
+  pid_turn_by(-43, 1000); // position to push on right side //-66
 
   printf("the secret recipe");
 
@@ -324,22 +324,22 @@ void autonomous(void) {
   //double_wing(); //open both wings
   wing1_move(); //open wing
   wait(0.2, sec);
-  pid_turn_by(5);
-  pid_drive(-35, 2500, 0, 100); //-10
-  pid_drive(20, 1000, 0, 30); //4
-  pid_turn_by(8);
-  pid_drive(-35, 2500, 0, 100); //-10
-  pid_drive(20, 1000, 0, 30); //4
+  pid_turn_by(-7);
+  pid_drive(-35, 1500, 0, 30); //-10
+  pid_drive(20, 800, 0, 30); //4
+  pid_turn_by(-6);
+  pid_drive(-35, 1500, 0, 30); //-10
+  pid_drive(20, 800, 0, 30); //4
+  wing1_move();
   // pid_drive(-12, 800, 0, 100); //-10
   // pid_drive(6, 1000, 0, 30); //4
   // pid_drive(-12, 800, 0, 100); //-10
   // pid_drive(8, 1000, 0, 39); //4
-  wing1_move();
   
-  pid_turn_by(-72, 1000); // position to go to middle to push triballs //-66
-  pid_drive(-60, 2500, 0, 60); //-27
+  pid_turn_by(-71, 1500); // position to go to middle to push triballs //-66
+  pid_drive(-63, 2500, 0, 12); //-27
 
-  pid_turn_by(100, 1500); //82
+  pid_turn_by(115, 1500); //82
   //wing2_move();
   //pid_turn_by(110, 1000);
 
@@ -348,17 +348,21 @@ void autonomous(void) {
 
   //wing2_move();
   double_wing(); //open right wings
-  pid_drive(-40, 2500, 0, 60); //-15 // push triballs
-  pid_drive(20, 1000, 0, 60);
+  pid_drive(-40, 1800, 0, 30); //-15 // push triballs
+  pid_drive(20, 1000, 0, 30);
   pid_turn_by(-5);
-  pid_drive(-40, 2500, 0, 60);
+  pid_drive(-40, 1600, 0, 30); //-15 // push triballs
+  pid_drive(20, 1000, 0, 30);
+  pid_drive(-40, 2000, 0, 30);
   double_wing(); //closes right here
-  pid_drive(30, 1800, 0, 60); 
+  wait(0.4, sec);
+  pid_drive(36, 1800, 0, 60); 
   //pid_drive(-12, 800, 0, 60); //third push
   //wing2_move(); //close both wings
   // double_wing(); moved it up
-  pid_turn_by(-65, 1200); //-73 //changed rn
-  pid_drive(-80.5, 3000, 0, 10); //-10 //FIX THIS
+  pid_turn_by(-97, 1200); //-73 //changed rn
+  //wing1_move();
+  pid_drive(-50.5, 3000, 0, 10); //-10 //FIX THIS
   //wing2_move(); //open wings
   pid_turn_by(120, 1500); //97
   double_wing();
@@ -366,23 +370,25 @@ void autonomous(void) {
   //wing1_move();
   pid_drive(-40, 2500, 0, 50); //-12
   pid_drive(20, 1000, 0, 30);
-  pid_turn_by(8);
+  pid_turn_by(-5);
   pid_drive(-40, 2500, 0, 50);
   pid_drive(20, 1000, 0, 30);
-  pid_turn_by(13);
+  pid_turn_by(-5);
   pid_drive(-40, 2500, 0, 50);
   pid_drive(30, 1800, 0, 30);
   //wing1_move(); //close both wings
   double_wing();
 
-  pid_turn_by(45); //-53
-  pid_drive(-25, 2000, 0, 40);
-  pid_turn_by(-87);
-  double_wing(); //open both wings
+  pid_turn_by(-65); //-53
+  pid_drive(-50, 2000, 0, 40);
+  pid_turn_by(90);
+  pid_drive(10);
+  pid_turn_by(15);
+  wing2_move(); //open both wings
   pid_drive(-30, 2500, 0, 60);
   pid_drive(20, 1000, 0, 60);
   pid_drive(-30, 2500, 0, 60);
-  double_wing(); //close both wings
+  wing2_move(); //close both wings
   pid_drive(20, 1000, 0, 60); 
 
   return;
